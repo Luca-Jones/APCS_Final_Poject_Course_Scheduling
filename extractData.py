@@ -3,9 +3,13 @@ alt = 0
 idArr = []
 studentArr = [[0 for i in range(23)] for j in range(23)]
 test = []
-slist = [[] for j in range(23)]
-alist = [[] for j in range(23)]
+studentlist = [[] for j in range(23)]
+altlist = [[] for j in range(23)]
 alternate = [[0 for i in range(23)] for j in range(23)]
+courselist = []
+numStudents = []
+numClasses = []
+
 try:
        f=open("python.txt","r")
        while True:
@@ -29,7 +33,31 @@ try:
                         alternate[len(idArr) -1][alt] = test[0]
                         alt = alt + 1
                     else:    
-                        studentArr[len(idArr) -1][count -1] = test[0]
+                        studentArr[len(idArr) -1][count -1] = test[0]        
+except FileNotFoundError:
+       print ("File is not found")
+else:
+       f.close()
+
+
+
+try:
+       fi=open("py.txt","r")
+       while True:
+                
+                line=fi.readline()
+                test = line.split(",", 16)
+                if line=='':
+                    break
+                courselist.append(test[0])
+                numStudents.append(test[9])
+                numClasses.append(test[14])
+                
+
+
+
+
+               
                 
             
                      
@@ -39,19 +67,19 @@ except FileNotFoundError:
 else:
        f.close()
 
-
+print (numClasses)
 for i in range(23):
     for j in range(23):
       if j == 0:
            print(idArr[i])
       if studentArr[i][j] != 0:
-        slist[i].append(studentArr[i][j])
+        studentlist[i].append(studentArr[i][j])
       if alternate[i][j] != 0:
-        alist[i].append(alternate[i][j])
+        altlist[i].append(alternate[i][j])
       
     if i == 22:
-        print(slist)
+        print(studentlist)
         print(" ")
         print(" ")
         print(" ")
-        print(alist)
+        print(altlist)
