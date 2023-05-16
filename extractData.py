@@ -1,11 +1,11 @@
 count = 0
 alt = 0
 idArr = []
-studentArr = [[0 for i in range(23)] for j in range(23)]
+studentArr = [[0 for i in range(838)] for j in range(20)]
 test = []
-studentlist = [[] for j in range(23)]
-altlist = [[] for j in range(23)]
-alternate = [[0 for i in range(23)] for j in range(23)]
+studentlist = [[] for j in range(838)]
+altlist = [[] for j in range(838)]
+alternate = [[0 for i in range(838)] for j in range(20)]
 courselist = []
 numStudents = []
 numClasses = []

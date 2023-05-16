@@ -6,11 +6,10 @@ os.system("cls")
 
 
 class Course:
-    def __init__(self, name, class_size, is_outside_timetable, sequencing, blocking, number_of_classes_per_year, is_required):
+    def __init__(self, name, class_size, is_outside_timetable, sequencing, blocking, number_of_classes_per_year):
         self._name = name
         self.number_of_classes_per_year = number_of_classes_per_year
         self._class_size = class_size
-        self._is_required = is_required
         self._is_outside_timetable  = is_outside_timetable
         self.sequencing = sequencing
         self.blocking = blocking
