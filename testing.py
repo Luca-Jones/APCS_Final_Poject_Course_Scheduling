@@ -43,5 +43,29 @@ while counter < len(data):
         after = after.replace('"', "") # deletes all "s
         array.append(before + after)
 
-for i in array:
+'''for i in array:
     print(i)
+'''
+def split_string(string, chunk_size):
+    return [string[i:i+chunk_size] for i in range(0, len(string), chunk_size)]
+
+
+
+
+
+
+array2D = {}
+counter1 = 0
+arr = []
+for i in range(len(array)):
+    arr = split_string(array[i], 10)
+    #print(arr)
+
+    array2D[arr[0]] = arr[1:]
+
+print(array2D)
+  
+
+
+
+
