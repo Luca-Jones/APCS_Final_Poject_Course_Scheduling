@@ -32,8 +32,8 @@ counter = 0 # the counter for the while loop
 target = "before" # the target word for the while loop\
 array = [] # the array of the order of things
 
-f = open("Data for Project\\Course Sequencing Rules.csv", "r")
-data = f.read().splitlines()
+f = open("Data for Project\\Course Sequencing Rules.csv", "r") # opens the file
+data = f.read().splitlines() # stores the file as an string array with each line as an element 
 
 while counter < len(data):
     my_string = data[counter]
@@ -54,8 +54,9 @@ arr = []
 for i in range(len(array)):
     arr = split_string(array[i], 10)
 
+    # if this course already exist as a key in the array
     if array_asso.get(arr[0]) is not None:
-        counter1 = 1
+        counter1 = 1 # counter for
         while counter1 < len(arr):
             array_asso[arr[0]].append(arr[counter1])
             counter1 += 1
