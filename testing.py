@@ -44,28 +44,22 @@ while counter < len(data):
         array.append(before + after)
 
 '''for i in array:
-    print(i)
-'''
+    print(i)'''
+
 def split_string(string, chunk_size):
     return [string[i:i+chunk_size] for i in range(0, len(string), chunk_size)]
 
-
-
-
-
-
-array2D = {}
-counter1 = 0
+array_asso = {}
 arr = []
 for i in range(len(array)):
     arr = split_string(array[i], 10)
-    #print(arr)
 
-    array2D[arr[0]] = arr[1:]
+    if array_asso.get(arr[0]) is not None:
+        counter1 = 1
+        while counter1 < len(arr):
+            array_asso[arr[0]].append(arr[counter1])
+            counter1 += 1
+    else:
+        array_asso[arr[0]] = arr[1:]
 
-print(array2D)
-  
-
-
-
-
+print(array_asso)
