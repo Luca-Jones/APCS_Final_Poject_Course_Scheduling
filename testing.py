@@ -1,10 +1,9 @@
 import os
-import re
-os.system('cls')
 
 def get_word_before_after(string, target_word):
-    string_without_commas = string.replace(",", "") # remove all commas
-    words = string_without_commas.split()  # Split the string into a list of words
+    
+    # remove all commas and split the string into a list of words
+    words = string.replace(",", "").split() 
     word_after = ""
 
     # if the word "before" exists in this line
@@ -27,7 +26,7 @@ def get_word_before_after(string, target_word):
 
     return word_before, word_after
 
-
+os.system('cls')
 counter = 0 # the counter for the while loop
 target = "before" # the target word for the while loop\
 array = [] # the array of the order of things
@@ -40,11 +39,8 @@ while counter < len(data):
     counter += 1
     before, after = get_word_before_after(my_string, target)
     if before != None and after != None:
-        after = after.replace('"', "") # deletes all "s
+        after = after.replace('"', "") # deletes all "
         array.append(before + after)
-
-'''for i in array:
-    print(i)'''
 
 def split_string(string, chunk_size):
     return [string[i:i+chunk_size] for i in range(0, len(string), chunk_size)]
