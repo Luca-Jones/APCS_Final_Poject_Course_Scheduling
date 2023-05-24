@@ -1,0 +1,268 @@
+ID,1000
+Course,,,,Description,,,Recommended,,,Alternate,,,,Alternate Courses,,,,Credit
+MADD-09---,,,ADST - Drafting 9,,,,,N,,,N,,,,,,,0.0000
+MADEM10---,,,ADST ? ENTREPRENEURSHIP AND MARKETING 10,,,,,N,,,N,,,,,,,4.0000
+MADW-09---,,,ADST - Woodwork 9,,,,,N,,,Y,,,,,,,0.0000
+MEN--09---,,,ENGLISH LANGUAGE ARTS 9,,,,,N,,,N,,,,,,,0.0000
+MFR--11---,,,FRENCH 11,,,,,N,,,N,,,,,,,4.0000
+MMA--09---,,,MATHEMATICS 9,,,,,N,,,N,,,,,,,0.0000
+MPHE-09B--,,,PHYSICAL AND HEALTH EDUCATION 9 Boys,,,,,N,,,N,,,,,,,0.0000
+MSC--09---,,,SCIENCE 9,,,,,N,,,N,,,,,,,0.0000
+MSP--09---,,,SPANISH 9,,,,,N,,,Y,,,,,,,0.0000
+MSS--09---,,,SOCIAL STUDIES 9,,,,,N,,,N,,,,,,,0.0000
+ID,1001
+Course,,,,Description,,,Recommended,,,Alternate,,,,Alternate Courses,,,,Credit
+MCLE-10---,,,CAREER LIFE EDUCATION 10,,,,,N,,,N,,,,,,,4.0000
+MFOOD11---,,,FOOD STUDIES 11,,,,,N,,,Y,,,,,,,4.0000
+MINST12C--,,,CONTEMPORARY INDIGENOUS STUDIES 12 CHALLENGE,,,,,N,,,N,,,,,,,4.0000
+MIT--11---,,,ITALIAN 11,,,,,N,,,N,,,,,,,4.0000
+MLTST11C--,,,LITERARY STUDIES 11 Challenge,,,,,N,,,N,,,,,,,4.0000
+MMACS11---,,,COMPUTER SCIENCE 11,,,,,N,,,N,,,,,,,4.0000
+MPH--11---,,,PHYSICS 11,,,,,N,,,N,,,,,,,4.0000
+MPREC11H--,,,PRE-CALCULUS 11 HONOURS,,,,,N,,,N,,,,,,,4.0000
+MTROB11---,,,ROBOTICS 11,,,,,N,,,N,,,,,,,4.0000
+ID,1002
+Course,,,,Description,,,Recommended,,,Alternate,,,,Alternate Courses,,,,Credit
+MCLE-10--L,,,CAREER LIFE EDUCATION 10 Linear,,,,,N,,,N,,,,,,,4.0000
+MCMPS11---,,,COMPOSITION 11,,,,,N,,,Y,,,,,,,4.0000
+MCTWR11---,,,CREATIVE WRITING 11,,,,,N,,,N,,,,,,,4.0000
+MDRM-11---,,,DRAMA 11,,,,,N,,,N,,,,,,,4.0000
+MIMCB11--L,,,INSTRUMENTAL MUSIC 11: CONCERT BAND LINEAR,,,,,N,,,N,,,,,,,4.0000
+MINST12---,,,CONTEMPORARY INDIGENOUS STUDIES 12,,,,,N,,,N,,,,,,,4.0000
+MLFSC11---,,,LIFE SCIENCES 11,,,,,N,,,N,,,,,,,4.0000
+MMEDD11---,,,MEDIA DESIGN 11,,,,,N,,,Y,,,,,,,4.0000
+MPREC11---,,,PRE-CALCULUS 11,,,,,N,,,N,,,,,,,4.0000
+MTDRF11---,,,DRAFTING 11,,,,,N,,,Y,,,,,,,4.0000
+MVAST11---,,,ART STUDIO 11,,,,,N,,,N,,,,,,,4.0000
+ID,1003
+Course,,,,Description,,,Recommended,,,Alternate,,,,Alternate Courses,,,,Credit
+MADD-09---,,,ADST - Drafting 9,,,,,N,,,N,,,,,,,0.0000
+MADEM10---,,,ADST ? ENTREPRENEURSHIP AND MARKETING 10,,,,,N,,,Y,,,,,,,4.0000
+MADGE09D--,,,ADST 9 - General Exploratns Design Innov & Inquiry,,,,,N,,,N,,,,,,,0.0000
+MAE--09---,,,ARTS EDUCATION 9,,,,,N,,,Y,,,,,,,0.0000
+MEN--09C--,,,ENGLISH LANGUAGE ARTS 9 CHALLENGE,,,,,N,,,N,,,,,,,0.0000
+MFR--09---,,,FRENCH 9,,,,,N,,,N,,,,,,,0.0000
+MMA--09C--,,,MATHEMATICS 9 CHALLENGE,,,,,N,,,N,,,,,,,0.0000
+MPHE-09G--,,,PHYSICAL AND HEALTH EDUCATION 9 Girls,,,,,N,,,N,,,,,,,0.0000
+MSC--09C--,,,SCIENCE 9: CHALLENGE,,,,,N,,,N,,,,,,,0.0000
+MSS--09C--,,,SOCIAL STUDIES 9 CHALLENGE,,,,,N,,,N,,,,,,,0.0000
+XLDCB09S-L,,,STRINGS 9 LINEAR,,,,,N,,,N,,,,,,,0.0000
+ID,1004
+Course,,,,Description,,,Recommended,,,Alternate,,,,Alternate Courses,,,,Credit
+MAC--11---,,,ACCOUNTING 11,,,,,N,,,N,,,,,,,4.0000
+MCMPR11W--,,,WEB DEVELOPMENT,,,,,N,,,Y,,,,,,,4.0000
+MCMPS10C--,,,COMPOSITION 10 Challenge,,,,,N,,,N,,,,,,,2.0000
+MFMP-10C--,,,FOUNDATIONS OF MATH AND PRE-CALCULUS 10 CHALLENGE,,,,,N,,,N,,,,,,,4.0000
+MMACS11---,,,COMPUTER SCIENCE 11,,,,,N,,,N,,,,,,,4.0000
+MMUCB10--L,,,INSTRUMENTAL MUSIC: CONCERT BAND 10 Linear,,,,,N,,,N,,,,,,,4.0000
+MPHED10--L,,,PHYSICAL AND HEALTH EDUCATION 10 LINEAR,,,,,N,,,N,,,,,,,4.0000
+MSC--10C--,,,SCIENCE 10: CHALLENGE,,,,,N,,,N,,,,,,,4.0000
+MSS--10C--,,,SOCIAL STUDIES 10 CHALLENGE,,,,,N,,,N,,,,,,,4.0000
+MTPOW10---,,,ADST ?  POWER TECHNOLOGY 10,,,,,N,,,Y,,,,,,,4.0000
+YED--0BX-L,,,PEER TUTORING 10 LINEAR,,,,,N,,,N,,,,,,,4.0000
+ID,1005
+Course,,,,Description,,,Recommended,,,Alternate,,,,Alternate Courses,,,,Credit
+MACC-12---,,,ACCOUNTING 12,,,,,N,,,N,,,,,,,4.0000
+MENFP12---,,,ENGLISH FIRST PEOPLES 12,,,,,N,,,N,,,,,,,4.0000
+MFOOD12---,,,FOOD STUDIES 12,,,,,N,,,N,,,,,,,4.0000
+MMACS12---,,,COMPUTER SCIENCE 12,,,,,N,,,N,,,,,,,4.0000
+MPREC12---,,,PRE-CALCULUS 12,,,,,N,,,N,,,,,,,4.0000
+MSTX-2A---,,,SKILLS EXPLORATION 12A,,,,,N,,,N,,,,,,,4.0000
+YCPA-2AX-L,,,COMMUNITY LEADERSHIP 12 Linear,,,,,N,,,N,,,,,,,4.0000
+YED--2FX-L,,,SCHOLARSHIP PREPARATION 12 LINEAR,,,,,N,,,N,,,,,,,4.0000
+YPSYC1AX--,,,PSYCHOLOGY 11,,,,,N,,,N,,,,,,,4.0000
+ID,1006
+Course,,,,Description,,,Recommended,,,Alternate,,,,Alternate Courses,,,,Credit
+MACC-12---,,,ACCOUNTING 12,,,,,N,,,N,,,,,,,4.0000
+MACLV12---,,,ACTIVE LIVING 12,,,,,N,,,N,,,,,,,4.0000
+MECOM12---,,,E-COMMERCE 12,,,,,N,,,N,,,,,,,4.0000
+MENFP12---,,,ENGLISH FIRST PEOPLES 12,,,,,N,,,N,,,,,,,4.0000
+MFOOD12---,,,FOOD STUDIES 12,,,,,N,,,N,,,,,,,4.0000
+MMEDD12---,,,MEDIA DESIGN 12,,,,,N,,,N,,,,,,,4.0000
+MPREC12---,,,PRE-CALCULUS 12,,,,,N,,,N,,,,,,,4.0000
+MTAUT12---,,,AUTOMOTIVE TECHNOLOGY 12,,,,,N,,,N,,,,,,,4.0000
+YCPA-2AX-L,,,COMMUNITY LEADERSHIP 12 Linear,,,,,N,,,N,,,,,,,4.0000
+YCPA-2AXE-,,,COMMUNITY LEADERSHIP 12,,,,,N,,,N,,,,,,,4.0000
+YED--2FX-L,,,SCHOLARSHIP PREPARATION 12 LINEAR,,,,,N,,,N,,,,,,,4.0000
+ID,1007
+Course,,,,Description,,,Recommended,,,Alternate,,,,Alternate Courses,,,,Credit
+MADEM10---,,,ADST ? ENTREPRENEURSHIP AND MARKETING 10,,,,,N,,,Y,,,,,,,4.0000
+MADFS09---,,,ADST - Food Studies 9,,,,,N,,,N,,,,,,,0.0000
+MADIT09---,,,ADST-Information and Communications Technologies 9,,,,,N,,,N,,,,,,,0.0000
+MDNC-09M-L,,,DANCE 9 Company: Platform 61 Linear,,,,,N,,,N,,,,,,,0.0000
+MEN--09---,,,ENGLISH LANGUAGE ARTS 9,,,,,N,,,N,,,,,,,0.0000
+MMA--09H--,,,MATHEMATICS 9 HONOURS,,,,,N,,,N,,,,,,,0.0000
+MPHE-09G--,,,PHYSICAL AND HEALTH EDUCATION 9 Girls,,,,,N,,,N,,,,,,,0.0000
+MSC--09---,,,SCIENCE 9,,,,,N,,,N,,,,,,,0.0000
+MSP--09---,,,SPANISH 9,,,,,N,,,N,,,,,,,0.0000
+MSS--09---,,,SOCIAL STUDIES 9,,,,,N,,,N,,,,,,,0.0000
+XC---09--L,,,CONCERT CHOIR 9 Linear,,,,,N,,,N,,,,,,,0.0000
+XLEAD09---,,,LEADERSHIP 9 LD,,,,,N,,,Y,,,,,,,0.0000
+ID,1008
+Course,,,,Description,,,Recommended,,,Alternate,,,,Alternate Courses,,,,Credit
+MADD-09---,,,ADST - Drafting 9,,,,,N,,,Y,,,,,,,0.0000
+MADEM10---,,,ADST ? ENTREPRENEURSHIP AND MARKETING 10,,,,,N,,,Y,,,,,,,4.0000
+MADIT09---,,,ADST-Information and Communications Technologies 9,,,,,N,,,N,,,,,,,0.0000
+MEN--09---,,,ENGLISH LANGUAGE ARTS 9,,,,,N,,,N,,,,,,,0.0000
+MMA--09---,,,MATHEMATICS 9,,,,,N,,,N,,,,,,,0.0000
+MPHE-09B--,,,PHYSICAL AND HEALTH EDUCATION 9 Boys,,,,,N,,,N,,,,,,,0.0000
+MSC--09---,,,SCIENCE 9,,,,,N,,,N,,,,,,,0.0000
+MSP--09---,,,SPANISH 9,,,,,N,,,N,,,,,,,0.0000
+MSS--09---,,,SOCIAL STUDIES 9,,,,,N,,,N,,,,,,,0.0000
+XLDCB09M--,,,TECH ED 9: MECHANICS LD,,,,,N,,,N,,,,,,,0.0000
+ID,1009
+Course,,,,Description,,,Recommended,,,Alternate,,,,Alternate Courses,,,,Credit
+MATPH12---,,,ANATOMY AND PHYSIOLOGY 12,,,,,N,,,N,,,,,,,4.0000
+MBIT-11,,,INTRODUCTORY ITALIAN 11,,,,,N,,,Y,,,,,,,4.0000
+MCALC12---,,,CALCULUS 12,,,,,N,,,Y,,,,,,,4.0000
+MCH--12---,,,CHEMISTRY 12,,,,,N,,,N,,,,,,,4.0000
+MENFP12---,,,ENGLISH FIRST PEOPLES 12,,,,,N,,,N,,,,,,,4.0000
+MENT-12---,,,ENTREPRENEURSHIP 12,,,,,N,,,N,,,,,,,4.0000
+MEVSC11---,,,ENVIRONMENTAL SCIENCE 11,,,,,N,,,N,,,,,,,4.0000
+MEVSC12C--,,,ENVIRONMENTAL SCIENCE 12 - CLIMATE CHANGE,,,,,N,,,N,,,,,,,4.0000
+MPGEO12---,,,PHYSICAL GEOGRAPHY 12,,,,,N,,,N,,,,,,,4.0000
+MPREC12---,,,PRE-CALCULUS 12,,,,,N,,,N,,,,,,,4.0000
+ID,1010
+Course,,,,Description,,,Recommended,,,Alternate,,,,Alternate Courses,,,,Credit
+MATPH12---,,,ANATOMY AND PHYSIOLOGY 12,,,,,N,,,N,,,,,,,4.0000
+MCH--11---,,,CHEMISTRY 11,,,,,N,,,Y,,,,,,,4.0000
+MCLE-10--L,,,CAREER LIFE EDUCATION 10 Linear,,,,,N,,,N,,,,,,,4.0000
+MGRPR11--L,,,GRAPHIC PRODUCTION 11 LINEAR,,,,,N,,,N,,,,,,,4.0000
+MIMCB11--L,,,INSTRUMENTAL MUSIC 11: CONCERT BAND LINEAR,,,,,N,,,N,,,,,,,4.0000
+MIMJB11--L,,,INSTRUMENTAL MUSIC 11: JAZZ BAND LINEAR,,,,,N,,,N,,,,,,,4.0000
+MINST12C--,,,CONTEMPORARY INDIGENOUS STUDIES 12 CHALLENGE,,,,,N,,,N,,,,,,,4.0000
+MLTST11C--,,,LITERARY STUDIES 11 Challenge,,,,,N,,,N,,,,,,,4.0000
+MMACS12---,,,COMPUTER SCIENCE 12,,,,,N,,,N,,,,,,,4.0000
+MMUOR11S-L,,,INSTRUMENTAL MUSIC: ORCHESTRA 11 Strings Linear,,,,,N,,,N,,,,,,,4.0000
+MPH--11---,,,PHYSICS 11,,,,,N,,,N,,,,,,,4.0000
+MPREC11H--,,,PRE-CALCULUS 11 HONOURS,,,,,N,,,N,,,,,,,4.0000
+MSTAT12---,,,STATISTICS 12,,,,,N,,,Y,,,,,,,4.0000
+YED--1EX-L,,,PEER TUTORING 11 LINEAR,,,,,N,,,N,,,,,,,4.0000
+ID,1011
+Course,,,,Description,,,Recommended,,,Alternate,,,,Alternate Courses,,,,Credit
+MADFS09---,,,ADST - Food Studies 9,,,,,N,,,N,,,,,,,0.0000
+MAE--09---,,,ARTS EDUCATION 9,,,,,N,,,N,,,,,,,0.0000
+MEN--09---,,,ENGLISH LANGUAGE ARTS 9,,,,,N,,,N,,,,,,,0.0000
+MMA--09---,,,MATHEMATICS 9,,,,,N,,,N,,,,,,,0.0000
+MPHE-09---,,,PHYSICAL AND HEALTH EDUCATION 9,,,,,N,,,N,,,,,,,0.0000
+MSC--09---,,,SCIENCE 9,,,,,N,,,N,,,,,,,0.0000
+MSS--09---,,,SOCIAL STUDIES 9,,,,,N,,,N,,,,,,,0.0000
+XBA--09G--,,,CONCERT BAND 9 - Guitar,,,,,N,,,N,,,,,,,0.0000
+ID,1012
+Course,,,,Description,,,Recommended,,,Alternate,,,,Alternate Courses,,,,Credit
+MDCF-10---,,,DANCE FOUNDATIONS 10,,,,,N,,,N,,,,,,,4.0000
+MEFWR10---,,,EFP WRITING 10,,,,,N,,,N,,,,,,,2.0000
+MFMP-10---,,,FOUNDATIONS OF MATH AND PRE-CALCULUS 10,,,,,N,,,N,,,,,,,4.0000
+MFOOD10---,,,ADST ?  FOOD STUDIES 10,,,,,N,,,N,,,,,,,4.0000
+MPHED10---,,,PHYSICAL AND HEALTH EDUCATION 10,,,,,N,,,N,,,,,,,4.0000
+MSC--10---,,,SCIENCE 10,,,,,N,,,N,,,,,,,4.0000
+MSS--10---,,,SOCIAL STUDIES 10,,,,,N,,,N,,,,,,,4.0000
+XBA--09G--,,,CONCERT BAND 9 - Guitar,,,,,N,,,N,,,,,,,0.0000
+ID,1013
+Course,,,,Description,,,Recommended,,,Alternate,,,,Alternate Courses,,,,Credit
+MAC--11---,,,ACCOUNTING 11,,,,,N,,,Y,,,,,,,4.0000
+MCH--11---,,,CHEMISTRY 11,,,,,N,,,N,,,,,,,4.0000
+MCH--12---,,,CHEMISTRY 12,,,,,N,,,N,,,,,,,4.0000
+MCLE-10---,,,CAREER LIFE EDUCATION 10,,,,,N,,,N,,,,,,,4.0000
+MCMPS11---,,,COMPOSITION 11,,,,,N,,,Y,,,,,,,4.0000
+MFR--12---,,,FRENCH 12,,,,,N,,,Y,,,,,,,4.0000
+MLST-12---,,,LAW STUDIES 12,,,,,N,,,N,,,,,,,4.0000
+MLTST11---,,,LITERARY STUDIES 11,,,,,N,,,N,,,,,,,4.0000
+MPH--11---,,,PHYSICS 11,,,,,N,,,N,,,,,,,4.0000
+MPREC11---,,,PRE-CALCULUS 11,,,,,N,,,N,,,,,,,4.0000
+YLAW-2CX--,,,CRIMINOLOGY 12,,,,,N,,,N,,,,,,,4.0000
+ID,1014
+Course,,,,Description,,,Recommended,,,Alternate,,,,Alternate Courses,,,,Credit
+MCMCC12--L,,,CHORAL MUSIC 12: CONCERT CHOIR Linear,,,,,N,,,N,,,,,,,4.0000
+MDCF-12---,,,DANCE FOUNDATIONS 12,,,,,N,,,N,,,,,,,4.0000
+MMUOR12S-L,,,INSTRUMENTAL MUSIC: ORCHESTRA 12 Strings Linear,,,,,N,,,N,,,,,,,4.0000
+ID,1015
+Course,,,,Description,,,Recommended,,,Alternate,,,,Alternate Courses,,,,Credit
+MCMPS10---,,,COMPOSITION 10,,,,,N,,,N,,,,,,,2.0000
+MFMP-10H--,,,FOUNDATIONS OF MATH AND PRE-CALCULUS 10 HONOURS,,,,,N,,,N,,,,,,,4.0000
+MFOOD10---,,,ADST ?  FOOD STUDIES 10,,,,,N,,,Y,,,,,,,4.0000
+MFR--10---,,,FRENCH 10,,,,,N,,,N,,,,,,,4.0000
+MPHED10G--,,,PHYSICAL AND HEALTH EDUCATION 10 Girls,,,,,N,,,N,,,,,,,4.0000
+MSC--10---,,,SCIENCE 10,,,,,N,,,N,,,,,,,4.0000
+MSS--10---,,,SOCIAL STUDIES 10,,,,,N,,,N,,,,,,,4.0000
+MVAPH10---,,,VISUAL ARTS: PHOTOGRAPHY 10,,,,,N,,,N,,,,,,,4.0000
+MWWK-10---,,,ADST ?  WOODWORK 10,,,,,N,,,Y,,,,,,,4.0000
+XBA--09G--,,,CONCERT BAND 9 - Guitar,,,,,N,,,N,,,,,,,0.0000
+YCPA-0AXE-,,,COMMUNITY LEADERSHIP 10,,,,,N,,,N,,,,,,,4.0000
+ID,1016
+Course,,,,Description,,,Recommended,,,Alternate,,,,Alternate Courses,,,,Credit
+AELC-12---,,,AP ENGLISH LITERATURE & COMPOSITION 12,,,,,N,,,N,,,,,,,4.0000
+MACLV11G--,,,ACTIVE LIVING 11 Girls,,,,,N,,,N,,,,,,,4.0000
+MEVSC12C--,,,ENVIRONMENTAL SCIENCE 12 - CLIMATE CHANGE,,,,,N,,,N,,,,,,,4.0000
+MFR--12---,,,FRENCH 12,,,,,N,,,N,,,,,,,4.0000
+MINST12---,,,CONTEMPORARY INDIGENOUS STUDIES 12,,,,,N,,,N,,,,,,,4.0000
+MLTST12---,,,LITERARY STUDIES 12,,,,,N,,,N,,,,,,,4.0000
+MPREC12---,,,PRE-CALCULUS 12,,,,,N,,,N,,,,,,,4.0000
+YCPA-2AX-L,,,COMMUNITY LEADERSHIP 12 Linear,,,,,N,,,N,,,,,,,4.0000
+YLAW-2CX--,,,CRIMINOLOGY 12,,,,,N,,,N,,,,,,,4.0000
+ID,1017
+Course,,,,Description,,,Recommended,,,Alternate,,,,Alternate Courses,,,,Credit
+MADEM10---,,,ADST ? ENTREPRENEURSHIP AND MARKETING 10,,,,,N,,,N,,,,,,,4.0000
+MADER09---,,,ADST - Electronics and Robotics,,,,,N,,,N,,,,,,,0.0000
+MADGE09D--,,,ADST 9 - General Exploratns Design Innov & Inquiry,,,,,N,,,Y,,,,,,,0.0000
+MADIT09---,,,ADST-Information and Communications Technologies 9,,,,,N,,,Y,,,,,,,0.0000
+MEN--09C--,,,ENGLISH LANGUAGE ARTS 9 CHALLENGE,,,,,N,,,N,,,,,,,0.0000
+MFR--09---,,,FRENCH 9,,,,,N,,,N,,,,,,,0.0000
+MMA--09C--,,,MATHEMATICS 9 CHALLENGE,,,,,N,,,N,,,,,,,0.0000
+MPHE-09---,,,PHYSICAL AND HEALTH EDUCATION 9,,,,,N,,,N,,,,,,,0.0000
+MSC--09C--,,,SCIENCE 9: CHALLENGE,,,,,N,,,N,,,,,,,0.0000
+MSS--09C--,,,SOCIAL STUDIES 9 CHALLENGE,,,,,N,,,N,,,,,,,0.0000
+ID,1018
+Course,,,,Description,,,Recommended,,,Alternate,,,,Alternate Courses,,,,Credit
+MADEM10---,,,ADST ? ENTREPRENEURSHIP AND MARKETING 10,,,,,N,,,Y,,,,,,,4.0000
+MADER09---,,,ADST - Electronics and Robotics,,,,,N,,,N,,,,,,,0.0000
+MADGE09D--,,,ADST 9 - General Exploratns Design Innov & Inquiry,,,,,N,,,Y,,,,,,,0.0000
+MADIT09---,,,ADST-Information and Communications Technologies 9,,,,,N,,,N,,,,,,,0.0000
+MEN--09C--,,,ENGLISH LANGUAGE ARTS 9 CHALLENGE,,,,,N,,,N,,,,,,,0.0000
+MFR--09---,,,FRENCH 9,,,,,N,,,Y,,,,,,,0.0000
+MMA--09C--,,,MATHEMATICS 9 CHALLENGE,,,,,N,,,N,,,,,,,0.0000
+MPHE-09---,,,PHYSICAL AND HEALTH EDUCATION 9,,,,,N,,,N,,,,,,,0.0000
+MSC--09C--,,,SCIENCE 9: CHALLENGE,,,,,N,,,N,,,,,,,0.0000
+MSP--09---,,,SPANISH 9,,,,,N,,,N,,,,,,,0.0000
+MSS--09C--,,,SOCIAL STUDIES 9 CHALLENGE,,,,,N,,,N,,,,,,,0.0000
+ID,1019
+Course,,,,Description,,,Recommended,,,Alternate,,,,Alternate Courses,,,,Credit
+MCLE-10---,,,CAREER LIFE EDUCATION 10,,,,,N,,,N,,,,,,,4.0000
+MCTWR11---,,,CREATIVE WRITING 11,,,,,N,,,N,,,,,,,4.0000
+MEPSS11---,,,EXPLORATIONS IN SOCIAL STUDIES 11,,,,,N,,,N,,,,,,,4.0000
+MEVSC11---,,,ENVIRONMENTAL SCIENCE 11,,,,,N,,,N,,,,,,,4.0000
+MFOOD11---,,,FOOD STUDIES 11,,,,,N,,,N,,,,,,,4.0000
+MIMJB11--L,,,INSTRUMENTAL MUSIC 11: JAZZ BAND LINEAR,,,,,N,,,N,,,,,,,4.0000
+MLTST11---,,,LITERARY STUDIES 11,,,,,N,,,Y,,,,,,,4.0000
+MVAPH11---,,,PHOTOGRAPHY 11,,,,,N,,,N,,,,,,,4.0000
+MWPM-11---,,,WORKPLACE MATHEMATICS 11,,,,,N,,,N,,,,,,,4.0000
+YPSYC1AX--,,,PSYCHOLOGY 11,,,,,N,,,N,,,,,,,4.0000
+ID,1020
+Course,,,,Description,,,Recommended,,,Alternate,,,,Alternate Courses,,,,Credit
+MFMP-10---,,,FOUNDATIONS OF MATH AND PRE-CALCULUS 10,,,,,N,,,N,,,,,,,4.0000
+MMEDD10---,,,ADST ? MEDIA DESIGN 10,,,,,N,,,N,,,,,,,4.0000
+MPHED10B--,,,PHYSICAL AND HEALTH EDUCATION 10 Boys,,,,,N,,,N,,,,,,,4.0000
+MSC--10---,,,SCIENCE 10,,,,,N,,,N,,,,,,,4.0000
+ID,1021
+Course,,,,Description,,,Recommended,,,Alternate,,,,Alternate Courses,,,,Credit
+MACC-12---,,,ACCOUNTING 12,,,,,N,,,Y,,,,,,,4.0000
+MCLE-10---,,,CAREER LIFE EDUCATION 10,,,,,N,,,N,,,,,,,4.0000
+MCMPS11---,,,COMPOSITION 11,,,,,N,,,N,,,,,,,4.0000
+MECOM12---,,,E-COMMERCE 12,,,,,N,,,N,,,,,,,4.0000
+MENT-12---,,,ENTREPRENEURSHIP 12,,,,,N,,,N,,,,,,,4.0000
+MEPSS11---,,,EXPLORATIONS IN SOCIAL STUDIES 11,,,,,N,,,N,,,,,,,4.0000
+MLFSC11---,,,LIFE SCIENCES 11,,,,,N,,,N,,,,,,,4.0000
+MLTST11---,,,LITERARY STUDIES 11,,,,,N,,,Y,,,,,,,4.0000
+MMAP-11---,,,MARKETING AND PROMOTION 11,,,,,N,,,Y,,,,,,,4.0000
+MPH--11---,,,PHYSICS 11,,,,,N,,,N,,,,,,,4.0000
+MPREC11---,,,PRE-CALCULUS 11,,,,,N,,,N,,,,,,,4.0000
+ID,1022
+Course,,,,Description,,,Recommended,,,Alternate,,,,Alternate Courses,,,,Credit
+MADEM10---,,,ADST ? ENTREPRENEURSHIP AND MARKETING 10,,,,,N,,,N,,,,,,,4.0000
+MCMPR11W--,,,WEB DEVELOPMENT,,,,,N,,,N,,,,,,,4.0000
+MEFWR10---,,,EFP WRITING 10,,,,,N,,,N,,,,,,,2.0000
+MFMP-10---,,,FOUNDATIONS OF MATH AND PRE-CALCULUS 10,,,,,N,,,N,,,,,,,4.0000
+MPHED10---,,,PHYSICAL AND HEALTH EDUCATION 10,,,,,N,,,N,,,,,,,4.0000
+MSC--10---,,,SCIENCE 10,,,,,N,,,N,,,,,,,4.0000
+MSP--10---,,,SPANISH 10,,,,,N,,,N,,,,,,,4.0000
+MSS--10---,,,SOCIAL STUDIES 10,,,,,N,,,N,,,,,,,4.0000
