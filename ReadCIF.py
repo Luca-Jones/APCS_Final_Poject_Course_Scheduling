@@ -1,5 +1,6 @@
 import os
 import csv
+import json
 os.system('cls')
 
 def cleanData(row):
@@ -23,6 +24,7 @@ def cleanData(row):
 
 # Initialize an empty array or 2D array
 data = []
+courses = {}
 
 # Open the CSV file
 with open('Data for Project\\Course Information.csv', 'r') as file:
@@ -35,8 +37,13 @@ with open('Data for Project\\Course Information.csv', 'r') as file:
         temp = cleanData(row)
         if temp != None:
             data.append(temp)
+            courses[temp[0]] = temp[1:]
 
-print(data)
+#print(data)
+print(courses)
+
+with open('courses.json', 'w') as file:
+    json.dump(courses, file)
 
 '''def split_string(string, chunk_size):
     return [string[i:i+chunk_size] for i in range(0, len(string), chunk_size)]

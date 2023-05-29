@@ -4,4 +4,3 @@ AP Computer Science final project written in python. AI that cerates a schedule 
 Packages:
 
 python -m pip install rich
-python -m pip install pandas

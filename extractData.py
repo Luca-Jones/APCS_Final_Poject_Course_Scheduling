@@ -18,6 +18,7 @@ class Course:
     
     def __repr__(self):
         return self.__str__()
+    
 
 class Class(Course):
     def __init__(self, name, class_size, is_outside_timetable, sequencing, blocking, semester):
@@ -260,4 +261,9 @@ for i in range(23):
 print(courselist)
 print(student)
       
-    
+
+output = {} 
+for i in courselist:
+    output[i._name] = i
+
+print(output)
