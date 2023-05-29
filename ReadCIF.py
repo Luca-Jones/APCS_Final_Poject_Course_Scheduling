@@ -1,6 +1,5 @@
 import os
 import csv
-import json
 os.system('cls')
 
 def cleanData(row):
@@ -18,13 +17,17 @@ def cleanData(row):
 
     #remove all
     updated_array = [x for x in row if x != ""]
+
+    #print(updated_array)
+    if updated_array[6] == "0":
+        return None
+    
     indexes_to_remove = [2, 3, 5, 8, 10]  # Example indexes to remove
     updated_array2 = [updated_array[i] for i in range(len(updated_array)) if i not in indexes_to_remove]
     return updated_array2
 
 # Initialize an empty array or 2D array
 data = []
-courses = {}
 
 # Open the CSV file
 with open('Data for Project\\Course Information.csv', 'r') as file:
@@ -37,29 +40,21 @@ with open('Data for Project\\Course Information.csv', 'r') as file:
         temp = cleanData(row)
         if temp != None:
             data.append(temp)
-            courses[temp[0]] = temp[1:]
 
-#print(data)
-print(courses)
+'''for i in range(len(data)):
+    print(data[i])'''
 
-with open('courses.json', 'w') as file:
-    json.dump(courses, file)
+def array_to_dictionary(array):
+    dictionary = {}
+    for item in array:
+        key = item[0]
+        values = item[1:]
+        dictionary[key] = values
+    return dictionary
 
-'''def split_string(string, chunk_size):
-    return [string[i:i+chunk_size] for i in range(0, len(string), chunk_size)]
+# the dictionary
+my_dict = array_to_dictionary(data)
 
-array_asso = {}
-arr = []
-for i in range(len(data)):
-    arr = split_string(data[i], 10)
-
-    # if this course already exist as a key in the array
-    if array_asso.get(arr[0]) is not None:
-        counter1 = 1 # counter for
-        while counter1 < len(arr):
-            array_asso[arr[0]].append(arr[counter1])
-            counter1 += 1
-    else:
-        array_asso[arr[0]] = arr[1:]
-
-print(array_asso)'''
+# print the dictionary
+for key, values in my_dict.items():
+    print(key, values)
