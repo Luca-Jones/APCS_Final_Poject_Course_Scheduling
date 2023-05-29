@@ -5,16 +5,22 @@ import os
 os.system("cls")
 
 class Course:
+    currentClasses = 0
+    sections = {}
+    
     def __init__(self, name, class_size, is_outside_timetable, sequencing, number_of_classes_per_year, is_linear):
+        
         self._name = name
         self.number_of_classes_per_year = number_of_classes_per_year
         self._class_size = class_size
         self.is_linear = is_linear
         self._is_outside_timetable  = is_outside_timetable
         self.sequencing = sequencing
-       
+        
+
+  
     def __str__(self):
-        return "\n" + str(self._name) + " is outside  " + str(self._is_outside_timetable )
+        return "\n" + str(self._name) + "\nis outside  " + str(self._is_outside_timetable ) + "\nis linear  " + str(self.is_linear) + "\nnumber of classes  " + str(self.number_of_classes_per_year ) +" \nclass size  " + str(self._class_size )  +"\nSequencing  " + str(self.sequencing ) + "\n\n"
     
     def __repr__(self):
         return self.__str__()
@@ -41,6 +47,10 @@ class Student:
         return str("\n\nid = " + str(self._id) + "Requests = " + str(self._course_requets) + " \nAlternates = " + str(self._alternates))
     def __repr__(self):
         return self.__str__()
+    
+    
+ 
+
 
 class Timetable:
     def __init__(self):
@@ -85,7 +95,7 @@ class Timetable:
                 self.block_2D.append(class_slot)
 
 tt = Timetable()
-print(tt)
+
 
 
 def get_word_before_after(string, target_word):
@@ -258,12 +268,36 @@ for i in range(23):
         altlist[i].append(alternate[i][j])
     if j == 22:
        student.append(Student(idArr[i],studentlist[i],altlist[i]))  
-print(courselist)
-print(student)
+    
+alpha = ["A", "B", "C", "D", "A", "B", "C", "D"]    
+master = {"Semester 1": {"A": [], "B": [], "C": [], "D":[]}, "Semester 2": {"A": [], "B": [], "C": [], "D":[]}}
+
+
+for course in courselist:
+
+    for i in range(len(student)):
+        for j in range (min(len(student[i]._course_requets), 8)):#len(student[i]._course_requets
+            if (course._name == student[i]._course_requets[j]):
+                if(alpha[j] in course.sections):
+                    
+                        course.sections[alpha[j]].append(student[i]._id)
+
+                        
+                else:
+                    arrrrrr = []
+                    arrrrrr.append(student[i]._id)
+                    course.sections[alpha[j]] = arrrrrr
+                    if(j < 4):
+                        master["Semester 1"][alpha[j]].append(course._name)
+                    
+                    else:
+                        master["Semester 2"][alpha[j]].append(course._name)
+                        
+
+print (master)
+
+
+
+
       
-
-output = {} 
-for i in courselist:
-    output[i._name] = i
-
-print(output)
+    
