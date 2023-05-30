@@ -8,7 +8,7 @@ class Course:
     
     
     
-    def __init__(self, name, class_size, is_outside_timetable, sequencing, number_of_classes_per_year, is_linear):
+    def __init__(self, name, class_size, is_outside_timetable, sequencing, number_of_classes_per_year, is_linear, description):
         
         self._name = name
         self.number_of_classes_per_year = number_of_classes_per_year
@@ -18,6 +18,8 @@ class Course:
         self.sequencing = sequencing
         self._sections = {}
         self._currentClasses = 0
+        self._description = description
+
         
 
   
@@ -45,6 +47,7 @@ class Student:
         self._course_requests = course_requests
         self._alternates = alternates
         self.student_classes = {}
+        self._cr = course_requests
     def __str__ (self):
         return str("\n\nid = " + str(self._id) + "Requests = " + str(self._course_requests) + " \nAlternates = " + str(self._alternates))
     def __repr__(self):
@@ -250,9 +253,9 @@ try:
                 #the name of the course, the amount of students, if its outside the timetable, course sequencing, amount of times it runs and if its linear
                 #if not do the same but without course sequencing
                 if  test[0] in array_asso.keys():
-                    courselist.append(Course(test[0],test[9] ,out, array_asso[test[0]],test[14], linear))
+                    courselist.append(Course(test[0],test[9] ,out, array_asso[test[0]],test[14], linear, test[2]))
                 else:
-                     courselist.append(Course(test[0],test[9] ,out, "",test[14], linear))
+                     courselist.append(Course(test[0],test[9] ,out, "",test[14], linear, test[2]))
       
 except FileNotFoundError:
        print ("File is not found")
@@ -261,9 +264,8 @@ else:
 
 #for loops that take the student requests and alternate requests from the remporary arrays they are stored in 
 #and creats a list with student objects with their alternate requests, course requests and id number
-for i in range(838):
+for i in range(len(idArr) - 1):
     for j in range(838):
-      
       if studentArr[i][j] != 0:
         studentlist[i].append(studentArr[i][j])
       if alternate[i][j] != 0:
@@ -272,16 +274,66 @@ for i in range(838):
        student.append(Student(idArr[i][0:4],studentlist[i],altlist[i]))  
     
 
-alpha = ["S1 A", "S1 B", "S1 C", "S1 D", "S2 A", "S2 B", "S2 C", "S2 D"]    
-master = {"S1 A": [], "S1 B": [], "S1 C": [], "S1 D":[], "S2 A": [], "S2 B": [], "S2 C": [], "S2 D":[]}
+alpha = ["S1 A", "S1 B", "S1 C", "S1 D", "S2 A", "S2 B", "S2 C", "S2 D","Outside"]                                    # timtable headers / keys   
+master = {"S1 A": [], "S1 B": [], "S1 C": [], "S1 D":[], "S2 A": [], "S2 B": [], "S2 C": [], "S2 D":[],"Outside":[]}     # master timetable
 
-
+def get_sequencing(name_of_course):
+    for c in courselist:
+        if name_of_course == c._name:
+            return list(c.sequencing)
+    return []
 
 for course in courselist:
+    '''
+    print(course._name)
+    print(":             ")
+    print(course.sequencing)
+    '''
+
     for i in range(len(student)):
         for j in range (min(len(student[i]._course_requests), 8)):
             
             if (course._name == student[i]._course_requests[j]):
+                
+               
+
+                # reject a course if it is a prerequisite for another course but they ask for it in semester 2
+                if j > 3:
+                    for seq in course.sequencing:
+                        if student[i]._course_requests.count(seq) > 0:
+                            continue
+
+
+                cont = False
+
+                # reject a course if it needs a prerequisite but they ask for it in semester 1
+                for pre in courselist:
+
+                    # does the requested course require a prerequisite? pre is the prerequisite
+                    if pre.sequencing.count(course._name) > 0:
+                        
+                        # does the student have the prerequisite
+                        if student[i]._course_requests.count(pre._name) > 0:
+                            
+                            # reject if in semester 1
+                            if j < 4:
+                                cont = True
+                                break
+
+                            # reject if they asked for the prerequisite and they don't already have it in their schedule
+                            if list(student[i].student_classes.values()).count(pre) == 0:
+                                cont = True
+                                break
+
+                if cont:
+                    continue
+                # ignore outside the timetable courses
+                temp = j 
+                if (outside_the_timetable.count(course._name) > 0):
+                    j = 8
+                   
+                    
+
                 if(alpha[j] in course._sections):
 
                     # check to see if full
@@ -291,14 +343,33 @@ for course in courselist:
                    
                 else:
                     if(len(course._sections) < int(course.number_of_classes_per_year)):
+                        
                         arrrrrr = []
                         arrrrrr.append(student[i]._id)
                         course._sections[alpha[j]] = arrrrrr
                         student[i].student_classes[alpha[j]] = course._name
-                        master[alpha[j]].append(course._name)
-                        course._currentClasses = course._currentClasses + 1
-  
+                        master[alpha[j]].append(course._description)
 
+                        # check if linear
+                        if (course.is_linear and outside_the_timetable.count(course._name) == 0):
+                            # add another slot in student classes
+                            student[i].student_classes[alpha[(j + 4) % 8]] = course._name
+                            # add another slot in master timetable
+                            master[alpha[(j + 4) % 8]].append(course._description)
+
+                        course._currentClasses = course._currentClasses + 1
+                if (outside_the_timetable.count(course._name) > 0):
+                     student[i]._course_requests.pop(temp)
+                     temp = temp -1
+                j = temp 
+
+'''
+for s in student:
+    print(s._course_requests)
+    print("\n")
+    print(s.student_classes)
+    print("\n\n\n")
+'''
 
 def show(itemslist):
     out = ""
@@ -320,3 +391,41 @@ table.add_row(*entries, style='bright_green')
 
 console = Console() 
 console.print(table)  
+
+
+def score(set):
+    total_score = 0
+    total_requests = 0
+
+    for s in set:
+        
+        total_requests += len(s._course_requests)
+
+        # find overlap
+        for c in s._course_requests:
+            if list(s.student_classes.values()).count(c) > 0:
+                total_score += 1
+
+    return total_score / total_requests
+
+
+print(score(student) // 0.001 / 10, " % ")
+
+def select_student(id):
+    print(student[id - 1000].student_classes)
+
+STUDENT_ID = 1500
+print("\nStudent ", STUDENT_ID, ":")
+select_student(STUDENT_ID)
+print(student[STUDENT_ID - 1000]._course_requests)
+print("\n")
+
+
+def get_course(name_of_course):
+    for c in courselist:
+        return c
+    return "not found"
+
+COURSE_NAME = "XLDCB09LS-"
+print(COURSE_NAME, ":   ")
+print(get_course(COURSE_NAME)._sections)
