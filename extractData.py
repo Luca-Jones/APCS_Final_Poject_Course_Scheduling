@@ -5,8 +5,8 @@ import os
 os.system("cls")
 
 class Course:
-    currentClasses = 0
-    sections = {}
+    
+    
     
     def __init__(self, name, class_size, is_outside_timetable, sequencing, number_of_classes_per_year, is_linear):
         
@@ -16,6 +16,8 @@ class Course:
         self.is_linear = is_linear
         self._is_outside_timetable  = is_outside_timetable
         self.sequencing = sequencing
+        self._sections = {}
+        self._currentClasses = 0
         
 
   
@@ -40,11 +42,11 @@ class Class(Course):
 class Student:
     def __init__(self, id, course_requests, alternates):
         self._id = id
-        self._course_requets = course_requests
+        self._course_requests = course_requests
         self._alternates = alternates
         self.student_classes = []
     def __str__ (self):
-        return str("\n\nid = " + str(self._id) + "Requests = " + str(self._course_requets) + " \nAlternates = " + str(self._alternates))
+        return str("\n\nid = " + str(self._id) + "Requests = " + str(self._course_requests) + " \nAlternates = " + str(self._alternates))
     def __repr__(self):
         return self.__str__()
     
@@ -255,7 +257,7 @@ try:
 except FileNotFoundError:
        print ("File is not found")
 else:
-       f.close()
+       fi.close()
 
 #for loops that take the student requests and alternate requests from the remporary arrays they are stored in 
 #and creats a list with student objects with their alternate requests, course requests and id number
@@ -269,35 +271,66 @@ for i in range(23):
     if j == 22:
        student.append(Student(idArr[i],studentlist[i],altlist[i]))  
     
-alpha = ["A", "B", "C", "D", "A", "B", "C", "D"]    
-master = {"Semester 1": {"A": [], "B": [], "C": [], "D":[]}, "Semester 2": {"A": [], "B": [], "C": [], "D":[]}}
 
+alpha = ["S1 A", "S1 B", "S1 C", "S1 D", "S2 A", "S2 B", "S2 C", "S2 D"]    
+master = {"S1 A": [], "S1 B": [], "S1 C": [], "S1 D":[], "S2 A": [], "S2 B": [], "S2 C": [], "S2 D":[]}
+
+print(len(courselist))
+print(len(student))
+print(len(student[i]._course_requests))
+
+print(courselist[0])
 
 for course in courselist:
-
     for i in range(len(student)):
-        for j in range (min(len(student[i]._course_requets), 8)):#len(student[i]._course_requets
-            if (course._name == student[i]._course_requets[j]):
-                if(alpha[j] in course.sections):
-                    
-                        course.sections[alpha[j]].append(student[i]._id)
+        for j in range (min(len(student[i]._course_requests), 8)):
+            
+            if (course._name == student[i]._course_requests[j]):
+                
+                #print(course._name)
+                #print(alpha[j] in course._sections)
+
+                if(alpha[j] in course._sections):
+
+                    # check to see if full
+
+                    #print("is in timetable")
+                    course._sections[alpha[j]].append(student[i]._id)
 
                         
                 else:
+                    #print("not yet")
                     arrrrrr = []
                     arrrrrr.append(student[i]._id)
-                    course.sections[alpha[j]] = arrrrrr
-                    if(j < 4):
-                        master["Semester 1"][alpha[j]].append(course._name)
-                    
-                    else:
-                        master["Semester 2"][alpha[j]].append(course._name)
-                        
+                    course._sections[alpha[j]] = arrrrrr
+                    #print(master[alpha[j]])
+                    master[alpha[j]].append(course._name)
+                    #print(master[alpha[j]])
+
+                if course._name == "ACAL-12---":
+                    print(course)       
 
 print (master)
 
 
+def show(itemslist):
+    out = ""
+    for item in itemslist:
+        out = out + item + "\n"
+    return out
 
 
-      
-    
+table = Table(title="TimeTable")
+rows = list(master.values())
+columns = alpha
+print(rows)
+for column in columns:
+    table.add_column(column)
+entries = []
+for row in rows:
+    entries.append(show(row))
+table.add_row(*entries, style='bright_green')
+
+console = Console() 
+console.print(table)  
+
