@@ -22,7 +22,7 @@ class Course:
 
   
     def __str__(self):
-        return "\n" + str(self._name) + "\nis outside  " + str(self._is_outside_timetable ) + "\nis linear  " + str(self.is_linear) + "\nnumber of classes  " + str(self.number_of_classes_per_year ) +" \nclass size  " + str(self._class_size )  +"\nSequencing  " + str(self.sequencing ) + "\n\n"
+        return str(self._sections)
     
     def __repr__(self):
         return self.__str__()
@@ -44,7 +44,7 @@ class Student:
         self._id = id
         self._course_requests = course_requests
         self._alternates = alternates
-        self.student_classes = []
+        self.student_classes = {}
     def __str__ (self):
         return str("\n\nid = " + str(self._id) + "Requests = " + str(self._course_requests) + " \nAlternates = " + str(self._alternates))
     def __repr__(self):
@@ -161,11 +161,11 @@ for i in range(len(array)):
 count = 0
 alt = 0
 idArr = []
-studentArr = [[0 for i in range(23)] for j in range(23)] #temporaty array which contains all student requests
+studentArr = [[0 for i in range(838)] for j in range(838)] #temporaty array which contains all student requests
 test = [] #array used to store data read from file
-studentlist = [[] for j in range(23)] #cleaned student requests are stored here before they are used to make a student object
-altlist = [[] for j in range(23)] #temporaty array which contains all alternate requests
-alternate = [[0 for i in range(23)] for j in range(23)]#cleaned alternate requests are stored here before they are used to make a student object
+studentlist = [[] for j in range(838)] #cleaned student requests are stored here before they are used to make a student object
+altlist = [[] for j in range(838)] #temporaty array which contains all alternate requests
+alternate = [[0 for i in range(838)] for j in range(838)]#cleaned alternate requests are stored here before they are used to make a student object
 courselist = [] #array containing all course objects
 student = [] #final list containing studen objects with their courses, altenates and id number
 outside_the_timetable = [
@@ -261,57 +261,50 @@ else:
 
 #for loops that take the student requests and alternate requests from the remporary arrays they are stored in 
 #and creats a list with student objects with their alternate requests, course requests and id number
-for i in range(23):
-    for j in range(23):
+for i in range(838):
+    for j in range(838):
       
       if studentArr[i][j] != 0:
         studentlist[i].append(studentArr[i][j])
       if alternate[i][j] != 0:
         altlist[i].append(alternate[i][j])
     if j == 22:
-       student.append(Student(idArr[i],studentlist[i],altlist[i]))  
+       student.append(Student(idArr[i][0:4],studentlist[i],altlist[i]))  
     
 
 alpha = ["S1 A", "S1 B", "S1 C", "S1 D", "S2 A", "S2 B", "S2 C", "S2 D"]    
 master = {"S1 A": [], "S1 B": [], "S1 C": [], "S1 D":[], "S2 A": [], "S2 B": [], "S2 C": [], "S2 D":[]}
 
-print(len(courselist))
-print(len(student))
-print(len(student[i]._course_requests))
 
-print(courselist[0])
 
 for course in courselist:
     for i in range(len(student)):
         for j in range (min(len(student[i]._course_requests), 8)):
             
             if (course._name == student[i]._course_requests[j]):
-                
-                #print(course._name)
-                #print(alpha[j] in course._sections)
-
                 if(alpha[j] in course._sections):
 
                     # check to see if full
-
-                    #print("is in timetable")
-                    course._sections[alpha[j]].append(student[i]._id)
-
-                        
+                    if(len(course._sections[alpha[j]]) < int(course._class_size)):
+                        student[i].student_classes[alpha[j]] = course._name
+                        course._sections[alpha[j]].append(student[i]._id)
+                    else:
+                        arrrrrr = []
+                        arrrrrr.append(student[i]._id)
+                        course._sections[alpha[j] + str(course._currentClasses) ] = arrrrrr
+                        student[i].student_classes[alpha[j]] = course._name
+                        master[alpha[j]].append(course._name)
+                        course._currentClasses = course._currentClasses + 1
+ 
                 else:
-                    #print("not yet")
                     arrrrrr = []
                     arrrrrr.append(student[i]._id)
                     course._sections[alpha[j]] = arrrrrr
-                    #print(master[alpha[j]])
+                    student[i].student_classes[alpha[j]] = course._name
                     master[alpha[j]].append(course._name)
-                    #print(master[alpha[j]])
-
-                if course._name == "ACAL-12---":
-                    print(course)       
-
+                    course._currentClasses = course._currentClasses + 1
+ 
 print (master)
-
 
 def show(itemslist):
     out = ""
@@ -323,7 +316,7 @@ def show(itemslist):
 table = Table(title="TimeTable")
 rows = list(master.values())
 columns = alpha
-print(rows)
+
 for column in columns:
     table.add_column(column)
 entries = []
@@ -333,4 +326,3 @@ table.add_row(*entries, style='bright_green')
 
 console = Console() 
 console.print(table)  
-
