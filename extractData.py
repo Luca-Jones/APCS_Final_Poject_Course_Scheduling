@@ -268,7 +268,7 @@ for i in range(838):
         studentlist[i].append(studentArr[i][j])
       if alternate[i][j] != 0:
         altlist[i].append(alternate[i][j])
-    if j == 22:
+    if j == 837:
        student.append(Student(idArr[i][0:4],studentlist[i],altlist[i]))  
     
 
@@ -288,23 +288,17 @@ for course in courselist:
                     if(len(course._sections[alpha[j]]) < int(course._class_size)):
                         student[i].student_classes[alpha[j]] = course._name
                         course._sections[alpha[j]].append(student[i]._id)
-                    else:
+                   
+                else:
+                    if(len(course._sections) < int(course.number_of_classes_per_year)):
                         arrrrrr = []
                         arrrrrr.append(student[i]._id)
-                        course._sections[alpha[j] + str(course._currentClasses) ] = arrrrrr
+                        course._sections[alpha[j]] = arrrrrr
                         student[i].student_classes[alpha[j]] = course._name
                         master[alpha[j]].append(course._name)
                         course._currentClasses = course._currentClasses + 1
- 
-                else:
-                    arrrrrr = []
-                    arrrrrr.append(student[i]._id)
-                    course._sections[alpha[j]] = arrrrrr
-                    student[i].student_classes[alpha[j]] = course._name
-                    master[alpha[j]].append(course._name)
-                    course._currentClasses = course._currentClasses + 1
- 
-print (master)
+  
+
 
 def show(itemslist):
     out = ""
