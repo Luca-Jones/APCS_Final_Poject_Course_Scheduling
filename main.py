@@ -19,6 +19,7 @@ class Course:
         self._sections = {}
         self._currentClasses = 0
         self._description = description
+
         
 
   
@@ -46,6 +47,7 @@ class Student:
         self._course_requests = course_requests
         self._alternates = alternates
         self.student_classes = {}
+        self._cr = course_requests
     def __str__ (self):
         return str("\n\nid = " + str(self._id) + "Requests = " + str(self._course_requests) + " \nAlternates = " + str(self._alternates))
     def __repr__(self):
@@ -272,8 +274,8 @@ for i in range(len(idArr) - 1):
        student.append(Student(idArr[i][0:4],studentlist[i],altlist[i]))  
     
 
-alpha = ["S1 A", "S1 B", "S1 C", "S1 D", "S2 A", "S2 B", "S2 C", "S2 D"]                                    # timtable headers / keys   
-master = {"S1 A": [], "S1 B": [], "S1 C": [], "S1 D":[], "S2 A": [], "S2 B": [], "S2 C": [], "S2 D":[]}     # master timetable
+alpha = ["S1 A", "S1 B", "S1 C", "S1 D", "S2 A", "S2 B", "S2 C", "S2 D","Outside"]                                    # timtable headers / keys   
+master = {"S1 A": [], "S1 B": [], "S1 C": [], "S1 D":[], "S2 A": [], "S2 B": [], "S2 C": [], "S2 D":[],"Outside":[]}     # master timetable
 
 def get_sequencing(name_of_course):
     for c in courselist:
@@ -293,9 +295,7 @@ for course in courselist:
             
             if (course._name == student[i]._course_requests[j]):
                 
-                # ignore outside the timetable courses
-                if (outside_the_timetable.count(course._name) > 0):
-                    continue
+               
 
                 # reject a course if it is a prerequisite for another course but they ask for it in semester 2
                 if j > 3:
@@ -327,7 +327,14 @@ for course in courselist:
 
                 if cont:
                     continue
-                            
+                # ignore outside the timetable courses
+                if (outside_the_timetable.count(course._name) > 0):
+                    temp = j
+                    j = 8
+                    
+                   
+                    
+
                 if(alpha[j] in course._sections):
 
                     # check to see if full
@@ -345,14 +352,18 @@ for course in courselist:
                         master[alpha[j]].append(course._description)
 
                         # check if linear
-                        if (course.is_linear):
+                        if (course.is_linear and outside_the_timetable.count(course._name) == 0):
                             # add another slot in student classes
                             student[i].student_classes[alpha[(j + 4) % 8]] = course._name
                             # add another slot in master timetable
                             master[alpha[(j + 4) % 8]].append(course._description)
 
                         course._currentClasses = course._currentClasses + 1
-  
+                if (outside_the_timetable.count(course._name) > 0):
+                     p = student[i]._course_requests.pop(temp)
+                     student[i]._course_requests.append(p)
+                     j = temp - 1
+                 
 
 '''
 for s in student:
@@ -405,7 +416,7 @@ print(score(student) // 0.001 / 10, " % ")
 def select_student(id):
     print(student[id - 1000].student_classes)
 
-STUDENT_ID = 1095
+STUDENT_ID = 1500
 print("\nStudent ", STUDENT_ID, ":")
 select_student(STUDENT_ID)
 print(student[STUDENT_ID - 1000]._course_requests)
