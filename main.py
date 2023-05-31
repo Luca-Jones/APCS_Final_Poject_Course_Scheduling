@@ -385,7 +385,7 @@ rows = list(master.values())
 columns = alpha
 
 for column in columns:
-    table.add_column(column)
+    table.add_column(column, no_wrap = True, min_width = 50)
 entries = []
 for row in rows:
     entries.append(show(row))
