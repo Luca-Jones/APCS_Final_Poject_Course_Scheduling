@@ -425,7 +425,8 @@ print("\n")
 
 def get_course(name_of_course):
     for c in courselist:
-        return c
+        if c._name == name_of_course:
+            return c
     return "not found"
 
 COURSE_NAME = "XLDCB09LS-"
