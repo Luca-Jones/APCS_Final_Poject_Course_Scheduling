@@ -276,13 +276,14 @@ for i in range(len(idArr) - 1):
 
 alpha = ["S1 A", "S1 B", "S1 C", "S1 D", "S2 A", "S2 B", "S2 C", "S2 D","Outside"]                                    # timtable headers / keys   
 master = {"S1 A": [], "S1 B": [], "S1 C": [], "S1 D":[], "S2 A": [], "S2 B": [], "S2 C": [], "S2 D":[],"Outside":[]}     # master timetable
-
+ 
 def get_sequencing(name_of_course):
     for c in courselist:
         if name_of_course == c._name:
             return list(c.sequencing)
     return []
-
+p = ""
+thing = []
 for course in courselist:
     '''
     print(course._name)
@@ -291,9 +292,10 @@ for course in courselist:
     '''
 
     for i in range(len(student)):
+        
         for j in range (min(len(student[i]._course_requests), 8)):
             
-            if (course._name == student[i]._course_requests[j]):
+            if (course._name == student[i]._course_requests[j] ):
                 
                
 
@@ -327,31 +329,45 @@ for course in courselist:
 
                 if cont:
                     continue
-                # ignore outside the timetable courses
-                temp = j 
+              
+
                 if (outside_the_timetable.count(course._name) > 0):
+                    temp = j
                     j = 8
-                   
-                    
+                    if(alpha[j] in student[i].student_classes):
+                        arrayrrrw = []
+                        arrayrrrw.append(student[i].student_classes[alpha[j]])
+                        student[i].student_classes[alpha[j]] = arrayrrrw
+
+
+
 
                 if(alpha[j] in course._sections):
 
                     # check to see if full
                     if(len(course._sections[alpha[j]]) < int(course._class_size)):
-                        student[i].student_classes[alpha[j]] = course._name
+                        if(alpha[j] in student[i].student_classes and outside_the_timetable.count(course._name) > 0):
+                            student[i].student_classes[alpha[j]].append(course._name)
+                        else:
+                              student[i].student_classes[alpha[j]] = course._name
                         course._sections[alpha[j]].append(student[i]._id)
                    
                 else:
+                   
                     if(len(course._sections) < int(course.number_of_classes_per_year)):
                         
                         arrrrrr = []
                         arrrrrr.append(student[i]._id)
                         course._sections[alpha[j]] = arrrrrr
-                        student[i].student_classes[alpha[j]] = course._name
+
+                        if(alpha[j] in student[i].student_classes and outside_the_timetable.count(course._name) > 0):
+                            student[i].student_classes[alpha[j]].append(course._name)
+                        else:
+                              student[i].student_classes[alpha[j]] = course._name
                         master[alpha[j]].append(course._description)
 
                         # check if linear
-                        if (course.is_linear and outside_the_timetable.count(course._name) == 0):
+                        if (course.is_linear and not course._is_outside_timetable):
                             # add another slot in student classes
                             student[i].student_classes[alpha[(j + 4) % 8]] = course._name
                             # add another slot in master timetable
@@ -359,9 +375,10 @@ for course in courselist:
 
                         course._currentClasses = course._currentClasses + 1
                 if (outside_the_timetable.count(course._name) > 0):
-                     student[i]._course_requests.pop(temp)
-                     temp = temp -1
-                j = temp 
+                     p = student[i]._course_requests.pop(temp)
+                     student[i]._course_requests.append(p)
+                     j = temp - 1 
+                 
 
 '''
 for s in student:
@@ -414,7 +431,7 @@ print(score(student) // 0.001 / 10, " % ")
 def select_student(id):
     print(student[id - 1000].student_classes)
 
-STUDENT_ID = 1500
+STUDENT_ID = 1319
 print("\nStudent ", STUDENT_ID, ":")
 select_student(STUDENT_ID)
 print(student[STUDENT_ID - 1000]._course_requests)
@@ -426,6 +443,6 @@ def get_course(name_of_course):
         return c
     return "not found"
 
-COURSE_NAME = "XLDCB09LS-"
+COURSE_NAME = "MCMCC12--L"
 print(COURSE_NAME, ":   ")
 print(get_course(COURSE_NAME)._sections)
