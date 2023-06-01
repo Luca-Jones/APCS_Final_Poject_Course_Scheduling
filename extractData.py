@@ -282,6 +282,12 @@ def get_sequencing(name_of_course):
         if name_of_course == c._name:
             return list(c.sequencing)
     return []
+
+for course in courselist:
+    if outside_the_timetable.count(course._name) > 0:
+        popped = courselist.pop(courselist.index(course))
+        courselist.insert(0, popped)
+
 p = ""
 thing = []
 for course in courselist:
@@ -440,7 +446,8 @@ print("\n")
 
 def get_course(name_of_course):
     for c in courselist:
-        return c
+        if c._name == name_of_course:
+            return c
     return "not found"
 
 COURSE_NAME = "MCMCC12--L"
