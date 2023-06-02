@@ -182,6 +182,12 @@ outside_the_timetable = [
     'MIMJB12--L', 'MWEX-2B--L', 'MMUOR12S-L', 'MCLC-12---'
 ] #hardcoded array with all outside the timetable classes
 
+        
+bad_courses = ['XLEAD09---',    'MGE--11',    'MGE--12', 'MKOR-10---',
+                       'MKOR-11---', 'MKOR-12---', 'MIT--12---', 'MSPLG11---',
+                       'MJA--10---', 'MJA--11---', 'MJA--12---',
+                       
+                       'MLTST10---', 'MLTST10--L']
 
 # find the course object with a specific course CODE
 def get_course(name_of_course):
@@ -272,7 +278,7 @@ else:
 #and creats a list with student objects with their alternate requests, course requests and id number
 for i in range(len(idArr) - 1):
     for j in range(838):
-      if studentArr[i][j] != 0:
+      if studentArr[i][j] != 0 and studentArr[i][j] not in bad_courses:
         studentlist[i].append(studentArr[i][j])
       if alternate[i][j] != 0:
         altlist[i].append(alternate[i][j])
