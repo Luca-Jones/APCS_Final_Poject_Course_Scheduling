@@ -179,7 +179,7 @@ outside_the_timetable = [
     'MGRPR11--L', 'MGMT-12L--', 'YED--1EX-L', 'MWEX-2A--L', 'MCMCC11--L', 'MWEX-2B--L',
     'MIMJB11--L', 'MMUOR11S-L', 'MDNC-12--L', 'YCPA-2AX-L', 'MDNCM12--L', 'YCPA-2AXE-',
     'MGRPR12--L', 'MGMT-12L--', 'YED--2DX-L', 'YED--2FX-L', 'MCMCC12--L', 'MWEX-2A--L',
-    'MIMJB12--L', 'MWEX-2B--L', 'MMUOR12S-', 'MCLC-12---'
+    'MIMJB12--L', 'MWEX-2B--L', 'MMUOR12S-L', 'MCLC-12---'
 ] #hardcoded array with all outside the timetable classes
 
 
@@ -462,7 +462,7 @@ for course in courselist:
                             course._currentClasses = course._currentClasses + 1
                     else:
                         for k in range(len(alpha) - 1):
-                            if(alpha[k] in course._sections):
+                            if(alpha[k] in course._sections and not alpha[k] in student[i].student_classes):
 
                                 # check to see if full
                                 if(len(course._sections[alpha[k]]) < int(course._class_size)):
@@ -556,16 +556,20 @@ print(score(student) // 0.001 / 10, " % ")
 def select_student(id):
     print(student[id - 1000].student_classes)
 
-STUDENT_ID = 1443
+STUDENT_ID = 1738
 print("\nStudent ", STUDENT_ID, ":")
 select_student(STUDENT_ID)
 print(student[STUDENT_ID - 1000]._course_requests)
 print("\n")
 
-COURSE_NAME = "MPREC12---"
+COURSE_NAME = "YESFL0AX-L"
 print(COURSE_NAME, ":   ")
 print(get_course(COURSE_NAME)._sections)
 
-COURSE_NAME = "MMUOR12S-L"
+COURSE_NAME = "MCMPS10---"
 print(COURSE_NAME, ":   ")
 print(get_course(COURSE_NAME)._sections)
+print("\n\n")
+
+for upo in student[STUDENT_ID - 1000]._course_requests:
+    print(get_course(upo)._description)
