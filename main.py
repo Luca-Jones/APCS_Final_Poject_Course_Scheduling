@@ -25,7 +25,7 @@ class Course:
 
   
     def __str__(self):
-        return str(self._sections)
+        return str(self._sections + "")
     
     def __repr__(self):
         return self.__str__()
@@ -442,7 +442,39 @@ for course in courselist:
                         
                         # add the student to the class
                         course._sections[alpha[j]].append(student[i]._id)
+                    else:
+                        for k in range(len(alpha) - 1):
+                            if(alpha[k] in course._sections and not alpha[k] in student[i].student_classes):
 
+                                # check to see if full
+                                if(len(course._sections[alpha[k]]) < int(course._class_size)):
+                                    if(alpha[k] in student[i].student_classes and outside_the_timetable.count(course._name) > 0):
+                                        student[i].student_classes[alpha[k]].append(course._name)
+                                    else:
+                                        student[i].student_classes[alpha[k]] = course._name
+                                    course._sections[alpha[k]].append(student[i]._id)
+                                    break
+                                else:
+                                
+                                    if(len(course._sections) < int(course.number_of_classes_per_year)):
+                                        
+                                        arrrrrr = []
+                                        arrrrrr.append(student[i]._id)
+                                        course._sections[alpha[k]] = arrrrrr
+
+                                        if(alpha[k] in student[i].student_classes and outside_the_timetable.count(course._name) > 0):
+                                            student[i].student_classes[alpha[k]].append(course._name)
+                                        else:
+                                            student[i].student_classes[alpha[k]] = course._name
+                                        master[alpha[k]].append(course._description)
+
+                                        # check if linear
+                                        if (course.is_linear and not course._is_outside_timetable and alpha[(k + 4) % 8] not in student[i].student_classes):
+                                            # add another slot in student classes
+                                            student[i].student_classes[alpha[(k + 4) % 8]] = course._name
+                                            # add another slot in master timetable
+                                            master[alpha[(k + 4) % 8]].append(course._description)
+                                        break
                 # makes a new block of this course if it doesn't exist yet  
                 else:
                    
@@ -477,7 +509,7 @@ for course in courselist:
                                     else:
                                         student[i].student_classes[alpha[k]] = course._name
                                     course._sections[alpha[k]].append(student[i]._id)
-                            
+                                    break
                                 else:
                                 
                                     if(len(course._sections) < int(course.number_of_classes_per_year)):
@@ -493,9 +525,9 @@ for course in courselist:
                                         master[alpha[k]].append(course._description)
 
                                         # check if linear
-                                        if (course.is_linear and not course._is_outside_timetable):
+                                        if (course.is_linear and not course._is_outside_timetable and alpha[(k + 4) % 8] not in student[i].student_classes):
                                             # add another slot in student classes
-                                            student[i].student_classes[alpha[(k + 4) % 8]] = course._name
+                                            student[i].student_classes[alpha[(k + 4) % 8]] = course._name 
                                             # add another slot in master timetable
                                             master[alpha[(k + 4) % 8]].append(course._description)
 
@@ -562,7 +594,7 @@ print(score(student) // 0.001 / 10, " % ")
 def select_student(id):
     print(student[id - 1000].student_classes)
 
-STUDENT_ID = 1738
+STUDENT_ID = 1740
 print("\nStudent ", STUDENT_ID, ":")
 select_student(STUDENT_ID)
 print(student[STUDENT_ID - 1000]._course_requests)
@@ -572,7 +604,8 @@ COURSE_NAME = "YESFL0AX-L"
 print(COURSE_NAME, ":   ")
 print(get_course(COURSE_NAME)._sections)
 
-COURSE_NAME = "MCMPS10---"
+print(get_course("MPHE-09--L"))
+COURSE_NAME = "MODED12---"
 print(COURSE_NAME, ":   ")
 print(get_course(COURSE_NAME)._sections)
 print("\n\n")
