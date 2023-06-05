@@ -541,7 +541,68 @@ for course in courselist:
                 
                 # DO NOT DELETE THIS
                 break         
-      
+'''
+
+
+
+# for all students
+for i in range(len(student)):
+
+    # for their alternates
+    for alt in student[i]._alternates:
+
+        # for all blocks
+        for k in range(8):
+
+            # is taken?
+            if alpha[k] not in student[i].student_classes:
+            
+                # is full?
+                print(alt)
+                if(len(get_course(alt)._sections[alpha[k]]) < int(get_course(alt)._class_size)):
+                    
+                    # add to student schedule
+                    student[i].student_classes[alpha[k]] = get_course(alt)._name
+
+                    # add to list of students in this class
+                    get_course(alt)._sections[alpha[k]].append(student[i]._id)
+
+                    # break on success
+                    break
+
+                # make a new class?
+                elif(len(get_course(alt)._sections) < int(get_course(alt).number_of_classes_per_year)):
+
+                    # make a new class and add the student to that class                    
+                    arrrrrr = []
+                    arrrrrr.append(student[i]._id)
+                    get_course(alt)._sections[alpha[k]] = arrrrrr
+
+                    # give the student that class in their schedule                 
+                    student[i].student_classes[alpha[k]] = get_course(alt)._name
+
+                    # add the course to the master timetable
+                    master[alpha[k]].append(get_course(alt)._description)
+
+                    # check if linear
+                    if (get_course(alt).is_linear and alpha[(k + 4) % 8] not in student[i].student_classes):
+                        
+                        # add to the opposite semester same block in student classes
+                        student[i].student_classes[alpha[(k + 4) % 8]] = get_course(alt)._name 
+
+                        # add another slot in master timetable
+                        master[alpha[(k + 4) % 8]].append(get_course(alt)._description)
+
+                    # update number of classes the course has
+                    get_course(alt)._currentClasses = get_course(alt)._currentClasses + 1
+                
+                    # break on success
+                    break
+
+
+
+
+'''      
 
 '''
 for s in student:
