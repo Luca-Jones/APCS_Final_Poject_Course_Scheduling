@@ -1,0 +1,87 @@
+def place(start, end):
+
+	for (start <= k <= end)
+
+		if student doesn't already have a class during that block
+
+			if course is offered during that block and class is not full
+				
+				# only deals with linear AND inside the time table
+				if course is linear and k != 8
+					
+					if same block other semester is free
+						
+						put student in the class
+						put the class in both blocks for the student's time table
+					
+					else
+					
+						continue (go to next block)
+						
+				else
+					
+					put student in the class and the class in the student's time table
+		
+
+				return True (to go to next student)		
+				
+			elif more classes of this course can be made
+				
+				if course is linear and k != 8
+				
+					if same block other semester is free
+						
+						create a new class for this course during this block
+						add the course to the student's time table in this block and same block other semester
+						add the student to the class
+						add the course to the master time table for the same block both semesters
+					
+					else
+					
+						continue (go to next block)
+					
+				else
+					
+					create a new class for this course during this block
+					add the course to the student's time table
+					add the student to the class
+					add the course to the master time table
+
+				return True (to go to next student)
+
+	return False
+
+
+
+def main():
+
+	for each course at MD
+
+		for each student
+			
+			for each request
+			
+				if course == request
+					
+					if the course is a prerequisite for another course that they have 
+					
+						for block from S2 A to S2 D
+						if place(4,7):
+							break
+
+					if the course needs a prerequisite from the requests
+					
+						for block from S1 A to S1 D
+						if place(0,3)
+							break
+					
+					if course is outside the time table
+					
+						block = outside
+						if place(8,8)
+							break
+
+					if place(0,7)
+						break
+						
+					break
