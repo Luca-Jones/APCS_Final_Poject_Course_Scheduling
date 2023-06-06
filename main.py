@@ -377,7 +377,8 @@ def place(start, end, i, course):
                         course._sections[alpha[k]].append(student[i]._id)
                         for sim_blk in course._sim_blocking:
                             if not sim_blk == "Simultaneous" and not sim_blk == course._name:
-                                get_course(sim_blk)._sections[alpha[k]].append(student[i]._id)
+                                if student[i]._id not in get_course(sim_blk)._sections[alpha[k]]:
+                                    get_course(sim_blk)._sections[alpha[k]].append(student[i]._id)
                         student[i].student_classes[alpha[k]] = course._name
                         student[i].student_classes[alpha[(k + 4) % 8]] = course._name
 
@@ -387,10 +388,11 @@ def place(start, end, i, course):
                 else:
 
                     course._sections[alpha[k]].append(student[i]._id)
-
+                    
                     for sim_blk in course._sim_blocking:
                         if not sim_blk == "Simultaneous" and not sim_blk == course._name:
-                            get_course(sim_blk)._sections[alpha[k]].append(student[i]._id)
+                            if student[i]._id not in get_course(sim_blk)._sections[alpha[k]]:
+                                get_course(sim_blk)._sections[alpha[k]].append(student[i]._id)
 
                     student[i].student_classes[alpha[k]] = course._name
 
@@ -464,18 +466,20 @@ for course in courselist:
             
             if (course._name == student[i]._course_requests[j]):
                 
-                if course._name in outside_the_timetable and place(8, 8, i, course):
-                    
-                    break
+                if course._name in outside_the_timetable:
+                    if place(8, 8, i, course):
+                        break
 
 
-                if is_prerequisite(course, i) and place(0, 3, i, course):
+                if is_prerequisite(course, i):
+                    if place(0, 3, i, course):
                     
-                    break
+                        break
                 
-                if has_prerequisite(course, i) and place(4, 7, i, course):
-                    
-                    break
+                if has_prerequisite(course, i):
+                    if place(4, 7, i, course):
+                        
+                        break
 
                 if place(0, 7, i, course):
 
@@ -655,7 +659,7 @@ def select_student(id):
         print(key, ": ", get_course(student[id - 1000].student_classes[key])._description)
     print("\n")
 
-STUDENT_ID = 1045
+STUDENT_ID = 1765
 print("\nStudent ", STUDENT_ID, ":")
 print(student[STUDENT_ID - 1000].student_classes)
 print("\n")
@@ -676,11 +680,11 @@ for upo in student[STUDENT_ID - 1000]._alternates:
         print(get_course(upo)._description)
 print("\n\n")
 
-COURSE_NAME = "MAC--11---"
+COURSE_NAME = "XBA--09B-L"
 print(COURSE_NAME, ":   ")
 print(get_course(COURSE_NAME)._sections)
 
-COURSE_NAME = "MACC-12---"
+COURSE_NAME = "XBA--09C-L"
 print(COURSE_NAME, ":   ")
 print(get_course(COURSE_NAME)._sections)
 
