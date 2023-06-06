@@ -1,0 +1,114 @@
+for each course at MD
+
+	for each student
+		
+		for each request
+		
+			if course == request
+				
+				reject a course if it is a prerequisite for another course but they ask for it in semester 2
+
+				reject a course if it needs a prerequisite but they ask for it in semester 1
+				
+				outside the time table courses are placed into a seperate time slot
+				
+				if course is already in the timetable (at j)
+				
+					if class not is full
+					
+						put student in the class, the class in the student timetable
+				
+					else
+						
+						for each block
+						
+							if the course is offered in block and the student does NOT already have a class during that block
+							
+								if class is not full
+								
+									if the block is taken up in the student's schedule and the course is outside the timetable
+									
+										add the course to the 'outside' schedule slot (unlimited # of classes)
+									
+									else
+									
+										if course is not linear
+										
+											put student in the class, the class in the student timetable 
+											
+										if course is linear and the same block other semester is free
+										
+											put student in the class, the class in the student timetable for both blocks
+											
+									break (to go to next request)		
+											
+								else
+
+									if there can be more classes of this course made
+									
+										create a new class for this course during this block
+											
+										if the class is already in the student's time table and it's outside the time table
+										
+											add the course to the 'outside' schedule slot (unlimited # of classes)
+											
+										else	
+
+											add the course to the student's time table
+											
+										add the course to the master time table
+											
+										if the course is linear and is not outside the time table and the opposite block is not already in the student's schedule
+
+											put the course into the student's schedule in the opposite block
+											put the course into the master time table in the opposite block
+										
+										break (to go to next request)
+				else 
+					
+					if there can be more classes of this course made
+
+						create a new class for this course during this block
+							
+						if the class is already in the student's time table and it's outside the time table
+						
+							add the course to the 'outside' schedule slot (unlimited # of classes)
+							
+						else	
+
+							add the course to the student's time table
+							
+						add the course to the master time table
+							
+						if the course is linear and is not outside the time table and the opposite block is not already in the student's schedule
+
+							put the course into the student's schedule in the opposite block
+							put the course into the master time table in the opposite block
+					
+					else 
+					
+						for each block
+						
+							if the course is offered during this block and this block is not already taken up in the student's timetable
+							
+			
+								if there's room left in the class
+								
+									if the student already has a class during this block and it is outside the time table
+										
+										add the course to the 'outside' schedule slot (unlimited # of classes)
+								
+									else 
+									
+										add the course to the student's time table
+								
+									put the student into the class
+									
+									break (to go to next request)
+								
+				if the course is outside the time table
+						
+					remove the course from the student's requests and put it to the end
+								
+				break (to go to next student since we have already matched the course to this student's request)
+				break (to go to next student since we have already matched the course to this student's request)
