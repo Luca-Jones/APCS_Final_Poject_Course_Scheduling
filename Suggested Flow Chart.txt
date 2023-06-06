@@ -9,7 +9,7 @@ def place(start, end):
 				# only deals with linear AND inside the time table
 				if course is linear and k != 8
 					
-					if same block other semester is free
+					if same block other semester is free in the student's time table
 						
 						put student in the class
 						put the class in both blocks for the student's time table
@@ -29,7 +29,7 @@ def place(start, end):
 				
 				if course is linear and k != 8
 				
-					if same block other semester is free
+					if same block other semester is free in the student's time table
 						
 						create a new class for this course during this block
 						add the course to the student's time table in this block and same block other semester
