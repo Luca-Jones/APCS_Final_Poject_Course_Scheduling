@@ -7,7 +7,6 @@ os.system("cls")
 class Course:
     
     
-    
     def __init__(self, name, class_size, is_outside_timetable, sequencing, number_of_classes_per_year, is_linear, description):
         
         self._name = name
@@ -21,6 +20,7 @@ class Course:
         self._description = description         # includes courses blocked with it
         self._temp_description = description    # holds the unique description
         self._sim_blocking = []                 # simultaneous blocking rules
+        self._terms_blocking = []
 
         
 
@@ -337,6 +337,15 @@ for my_string in data:
                     get_course(blocked_course)._description = collective_description
                     get_course(blocked_course)._sim_blocking = blocking_rules
 
+        elif blocking_rules[-1] == "Terms":
+
+            for blocked_course in blocking_rules:
+                
+                if not get_course(blocked_course) == "not found":
+
+                    get_course(blocked_course)._terms_blocking = blocking_rules
+
+
         arrayCBR.append(blocking_rules)
 
 
@@ -353,8 +362,15 @@ def get_sequencing(name_of_course):
             return list(c.sequencing)
     return []
 
+# terms blocked courses come before outside
 for course in courselist:
-    if outside_the_timetable.count(course._name) > 0:
+    if course._terms_blocking:
+        popped = courselist.pop(courselist.index(course))
+        courselist.insert(0, popped)
+
+# otside comes first
+for course in courselist:
+    if course._name in outside_the_timetable:
         popped = courselist.pop(courselist.index(course))
         courselist.insert(0, popped)
 
@@ -398,7 +414,7 @@ def place(start, end, i, course):
 
                 return True
 
-            elif len(course._sections) < int(course.number_of_classes_per_year):
+            elif len(course._sections) < int(course.number_of_classes_per_year) and alpha[k] not in course._sections:
 
                 if course.is_linear and not k == 8:
 
@@ -449,6 +465,7 @@ def has_prerequisite(c, i):
     return False        
 
 
+
 '''
 
             Main Algorithm
@@ -466,6 +483,11 @@ for course in courselist:
             
             if (course._name == student[i]._course_requests[j]):
                 
+                if course._terms_blocking:
+                    if course._terms_blocking[0] == course._name:
+                        place(0, 3, i, course)
+                        place(4, 7, i, get_course(course._terms_blocking[1]))
+
                 if course._name in outside_the_timetable:
                     if place(8, 8, i, course):
                         break
@@ -487,8 +509,28 @@ for course in courselist:
 
                 break          
 
-                
-      
+def copy_terms(course, course_copy):
+    
+    # add class to the right blocking in the master timetable
+    for j in range(4):
+        if alpha[j] in course._sections:
+            master[alpha[j + 4]] = list(map(lambda x: x.replace(course._description, course_copy._description), master[alpha[j+4]]))
+
+
+    #master[alpha[k]].append(course_copy._description)
+
+    # add students to the right blocks
+
+    pass
+
+# tems blocking copying
+for course in courselist:
+    if course._terms_blocking:
+        if course._terms_blocking[1] == course._name:
+            copy_terms(get_course(course._terms_blocking[1]) , course)
+                          
+
+
 # alternates
 
 # for all students
@@ -659,7 +701,7 @@ def select_student(id):
         print(key, ": ", get_course(student[id - 1000].student_classes[key])._description)
     print("\n")
 
-STUDENT_ID = 1765
+STUDENT_ID = 1241
 print("\nStudent ", STUDENT_ID, ":")
 print(student[STUDENT_ID - 1000].student_classes)
 print("\n")
@@ -680,11 +722,10 @@ for upo in student[STUDENT_ID - 1000]._alternates:
         print(get_course(upo)._description)
 print("\n\n")
 
-COURSE_NAME = "XBA--09B-L"
+COURSE_NAME = "MSPLG10--L"
 print(COURSE_NAME, ":   ")
 print(get_course(COURSE_NAME)._sections)
 
-COURSE_NAME = "XBA--09C-L"
+COURSE_NAME = "YESFL0AX-L"
 print(COURSE_NAME, ":   ")
 print(get_course(COURSE_NAME)._sections)
-
