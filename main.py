@@ -374,6 +374,7 @@ for course in courselist:
         popped = courselist.pop(courselist.index(course))
         courselist.insert(0, popped)
 
+
 p = ""
 thing = []
 
@@ -484,9 +485,13 @@ for course in courselist:
             if (course._name == student[i]._course_requests[j]):
                 
                 if course._terms_blocking:
+                    
                     if course._terms_blocking[0] == course._name:
+                    
                         place(0, 3, i, course)
                         place(4, 7, i, get_course(course._terms_blocking[1]))
+                    
+                    break
 
                 if course._name in outside_the_timetable:
                     if place(8, 8, i, course):
