@@ -290,11 +290,6 @@ for i in range(len(idArr) - 1):
 
 
 
-
-
-
-
-
 # gets data for blocking rules
 def get_data(string):
     try:
@@ -379,6 +374,14 @@ for course in courselist:
 p = ""
 thing = []
 
+# returns true if student[i] has a linear course that needs to be paired
+def has_a_linear_course(i):
+    for block in student[i].student_classes:
+        if len(student[i].student_classes[block]) == 1 and get_course(student[i].student_classes[block][0]).is_linear and student[i].student_classes[block][0] not in outside_the_timetable:
+            return block
+    return False
+
+
 # places student[i] in course somewhere from alpha[start] to alpha[end]
 def place(start, end, i, course):
 
@@ -419,11 +422,53 @@ def place(start, end, i, course):
 
         # if course is linear and inside the time table (second half implied)
         elif course.is_linear:
-            if alpha[k] in student[i].student_classes and len(student[i].student_classes[alpha[k]]) == 1 and get_course(student[i].student_classes[alpha[k]][0]).is_linear:
-                print(course._name, " with ", student[i].student_classes[alpha[k]][0])
             
+            # if student time table already has a linear course
+            block = has_a_linear_course(i)
+            print(i + 1000, " is trying to put ", course._name ," in ", block)
+            if block:
+
+                # if the class exists in this block already and has space
+                if block in course._sections and len(course._sections[block]) < int(course._class_size):
+                    
+                    # add the student to the class and the sim blocking
+                    course._sections[block].append(student[i]._id)
+
+                    for sim_blk in course._sim_blocking:
+                        if not sim_blk == "Simultaneous" and not sim_blk == course._name:
+                            get_course(sim_blk)._sections[block].append(student[i]._id)
+
+                    # give the student the class combined with the other linear course
+                    
+                    student[i].student_classes[block].append(course._name)
+                    student[i].student_classes[alpha[(alpha.index(block) + 4) % 8]].append(course._name)
+
+
+                # if a new course can be made
+                elif len(course._sections) < int(course.number_of_classes_per_year) and alpha[k] not in course._sections:
+
+                    # create a new class with the student in it and for sim blocking
+                    course._sections[block] = [student[i]._id]
+
+                    for sim_blk in course._sim_blocking:
+                        if not sim_blk == "Simultaneous" and not sim_blk == course._name:
+                            get_course(sim_blk)._sections[block] = [student[i]._id]
+
+
+                    # give the student this class with the other linear class
+                    student[i].student_classes[block].append(course._name)
+                    student[i].student_classes[alpha[(alpha.index(block) + 4) % 8]].append(course._name)
+
+                    # add the class to the master time table
+                    master[block].append(course._description)
+                    master[alpha[(alpha.index(block) + 4) % 8]].append(course._description)
+
+                # go to next student
+                return True
+            
+
             # block not taken yet?
-            if alpha[k] not in student[i].student_classes and alpha[(k + 4) % 8] not in student[i].student_classes:
+            elif alpha[k] not in student[i].student_classes and alpha[(k + 4) % 8] not in student[i].student_classes:
                
                 # if the class exists in this block already and has space
                 if alpha[k] in course._sections and len(course._sections[alpha[k]]) < int(course._class_size):
@@ -439,6 +484,8 @@ def place(start, end, i, course):
                     student[i].student_classes[alpha[k]] = [course._name]
                     student[i].student_classes[alpha[(k + 4) % 8]] = [course._name]
                     
+                    return True
+
                 # if a new course can be made
                 elif len(course._sections) < int(course.number_of_classes_per_year) and alpha[k] not in course._sections:
                     
@@ -457,8 +504,10 @@ def place(start, end, i, course):
                     master[alpha[k]].append(course._description)
                     master[alpha[(k + 4) % 8]].append(course._description)
 
+                    return True
+
             # if there's already a linear course to pair up with
-            elif alpha[k] in student[i].student_classes and len(student[i].student_classes[alpha[k]]) == 1 and get_course(student[i].student_classes[alpha[k]][0]).is_linear:
+            '''elif alpha[k] in student[i].student_classes and len(student[i].student_classes[alpha[k]]) == 1 and get_course(student[i].student_classes[alpha[k]][0]).is_linear:
                 
                 # if the class exists in this block already and has space
                 if alpha[k] in course._sections and len(course._sections[alpha[k]]) < int(course._class_size):
@@ -473,6 +522,8 @@ def place(start, end, i, course):
                     # give the student the class combined with the other linear course
                     student[i].student_classes[alpha[k]].append(course._name)
                     student[i].student_classes[alpha[(k + 4) % 8]].append(course._name)
+
+                    return True
 
                 # if a new course can be made
                 elif len(course._sections) < int(course.number_of_classes_per_year) and alpha[k] not in course._sections:
@@ -492,6 +543,9 @@ def place(start, end, i, course):
                     # add the class to the master time table
                     master[alpha[k]].append(course._description)
                     master[alpha[(k + 4) % 8]].append(course._description)
+
+                    return True'''
+
 
     return False
 
@@ -762,7 +816,7 @@ def select_student(id):
             print(key, ": ", get_course(l)._description)
     print("\n")
 
-STUDENT_ID = 1092
+STUDENT_ID = 1785
 print("\nStudent ", STUDENT_ID, ":")
 print(student[STUDENT_ID - 1000].student_classes)
 print("\n")
