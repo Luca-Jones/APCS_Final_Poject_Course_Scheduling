@@ -242,7 +242,7 @@ else:
 
 
 try:
-       fi=open("pyp.txt","r")
+       fi=open("seed.txt","r")
        while True:
                 #sets linear and out(short for outside the timetable) to false
                 linear = False
