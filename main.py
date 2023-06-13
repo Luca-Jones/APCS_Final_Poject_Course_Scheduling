@@ -789,7 +789,7 @@ for iteration in range(10):
     if (students_with_eight_courses(student) >= students_with_eight_courses(best_student)): 
         best_master = copy.deepcopy(master) 
         best_student = copy.deepcopy(student)
-        best_courselist = copy.deepcopy(courselist)  
+        best_courselist = copy.deepcopy(temp_courselist)  
 
     # clear curent variables
         # student
@@ -870,8 +870,10 @@ print(get_course(COURSE_NAME, best_courselist)._sections)
 #for course in courselist:
  #   print(course._description, " : " , course._sections)
 
+for i in range(len(best_courselist)):
+    print(courselist[i]._name, " --> ", best_courselist[i]._name)
 
-with open("output.txt", "w") as file:
+with open("seed.txt", "w") as file:
     
     
     for course in best_courselist:
@@ -880,4 +882,4 @@ with open("output.txt", "w") as file:
         if not course.is_linear:
             lin = 2
 
-        file.write(str(course._name) + ",,"+ str(course._temp_description) + ",,,N,," + lin + ",1," + str(course._class_size) + ",,,,," + int(course.number_of_classes_per_year) + ",,,,Y\n")
+        file.write(str(course._name) + ",,"+ str(course._temp_description) + ",Department,,N,," + str(lin) + ",1," + str(course._class_size) + ",C,,Priority,," + str(int(course.number_of_classes_per_year)) + ",,,,Y\n")
