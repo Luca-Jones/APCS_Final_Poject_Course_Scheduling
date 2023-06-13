@@ -729,42 +729,48 @@ def score_with_alternates(set):
 
 def has_eight_courses(stu):
     combined_list = []
+    satisfied = 0
 
     for lst in list(stu.student_classes.values()):
         combined_list.extend(lst)
 
-    for i in range(min(len(stu._course_requests) , 8)):
-        if not stu._course_requests[i] in combined_list:
-            return False
+    for c in stu._course_requests:
+        if c in combined_list and c not in outside_the_timetable:
+            satisfied += 1
         
-    return True
+    return satisfied > 5
 
 def students_with_eight_courses(set):
     score = 0
 
-    for stu in student:
+    for stu in set:
         if has_eight_courses(stu):
             score += 1
 
     return score / 838
         
 def has_eight_courses_including_alternates(stu):
-    n = 0
+    combined_list = []
+    satisfied = 0
 
-    if "Outside" in stu.student_classes:
-        n = 1
+    for lst in list(stu.student_classes.values()):
+        combined_list.extend(lst)
 
-    # students should have 8 inside the timetable courses
-    if len(stu.student_classes) < min(len(stu._course_requests) + len(stu._alternates) , 8) + n:
-        return False
-    
-    return True
+    for c in stu._course_requests:
+        if c in combined_list and c not in outside_the_timetable:
+            satisfied += 1
+
+    for c in stu._alternates:
+        if c in combined_list and c not in outside_the_timetable:
+            satisfied += 1
+        
+    return satisfied > 5
 
 def students_with_eight_courses_including_alternates(set):
     counter = 0
     score = 0
 
-    for stu in student:
+    for stu in set:
         if has_eight_courses_including_alternates(stu):
             if counter < 3:
                 #print(stu)
@@ -775,42 +781,43 @@ def students_with_eight_courses_including_alternates(set):
 
 print("percent of courses granted", score(student) // 0.001 / 10, " % ")
 print("percent of courses + alts granted", score_with_alternates(student) // 0.001 / 10, " % ")
-print("percent of students with eight courses", students_with_eight_courses(student) // 0.001 / 10, " % ")
-print("percent of students with 8 courses + alts", students_with_eight_courses_including_alternates(student) // 0.001 / 10, " % ")
-
+print("Percent of students with 8/8, 7/8, 6/8. No alt.", students_with_eight_courses(student) // 0.001 / 10, " % ")
+print("of students with 8/8, 7/8, 6/8. With Alt", students_with_eight_courses_including_alternates(student) // 0.001 / 10, " % ")
+print("Percent of students with 0-5/8 courses", (1 - students_with_eight_courses(student)) // 0.001 / 10, " % ")
 
 def select_student(id):
     for key in student[int(id) - 1000].student_classes:
         for l in student[id - 1000].student_classes[key]:
-            print(key, ": ", get_course(l)._description)
+            print(key, ": ", get_course(l)._temp_description)
     print("\n")
 
-STUDENT_ID = 1001
-print("\nStudent ", STUDENT_ID, ":")
-print(student[STUDENT_ID - 1000].student_classes)
-print("\n")
-select_student(STUDENT_ID)
-print("\n")
-print(student[STUDENT_ID - 1000]._course_requests)
-print("\n")
-print(student[STUDENT_ID - 1000]._alternates)
-print("\n")
+for STUDENT_ID in range(1800, 1810, 1):
+    print("\nStudent ", STUDENT_ID, ":")
+    #print(student[STUDENT_ID - 1000].student_classes)
+    print("\n")
+    select_student(STUDENT_ID)
+    print("\n")
+    '''
+    print(student[STUDENT_ID - 1000]._course_requests)
+    print("\n")
+    print(student[STUDENT_ID - 1000]._alternates)
+    print("\n")
 
-for upo in student[STUDENT_ID - 1000]._course_requests:
-    print(get_course(upo)._description)
+    for upo in student[STUDENT_ID - 1000]._course_requests:
+        print(get_course(upo)._temp_description)
 
-print("\n")
+    print("\n")
 
-for upo in student[STUDENT_ID - 1000]._alternates:
-    if (not get_course(upo) == "not found"):
-        print(get_course(upo)._description)
-print("\n\n")
-
-COURSE_NAME = "MPHE-09--L"
+    for upo in student[STUDENT_ID - 1000]._alternates:
+        if (not get_course(upo) == "not found"):
+            print(get_course(upo)._temp_description)
+    print("\n\n")
+    '''
+COURSE_NAME = "MFOOD11---"
 print(COURSE_NAME, ":   ")
 print(get_course(COURSE_NAME)._sections)
 
-COURSE_NAME = "MADER09---"
+COURSE_NAME = "MTROB11---"
 print(COURSE_NAME, ":   ")
 print(get_course(COURSE_NAME)._sections)
 
