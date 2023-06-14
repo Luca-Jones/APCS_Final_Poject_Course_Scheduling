@@ -514,7 +514,14 @@ for iteration in range(10):
 
     # places student[i] in course somewhere from alpha[start] to alpha[end]
     def place(start, end, i, course):
-
+        
+        c = 1
+        if int(student[i]._id) % 2 == 0:
+            temp = start
+            start = end
+            end = temp -2
+            c = -1
+            
         # look through every available block
         for k in range(start, end + 1, 1):
 
