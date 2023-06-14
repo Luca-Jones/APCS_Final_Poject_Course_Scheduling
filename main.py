@@ -350,27 +350,6 @@ for my_string in data:
 
 # SUCCESS METRICS
 
-def has_eight_courses(stu):
-        combined_list = []
-
-        for lst in list(stu.student_classes.values()):
-            combined_list.extend(lst)
-
-        for i in range(min(len(stu._course_requests) , 8)):
-            if not stu._course_requests[i] in combined_list:
-                return False
-            
-        return True
-
-def students_with_eight_courses(set):
-    score = 0
-
-    for stu in set:
-        if has_eight_courses(stu):
-            score += 1
-
-    return score / 838
-
 def score(set):
     total_score = 0
     total_requests = 0
@@ -409,18 +388,45 @@ def score_with_alternates(set):
                     total_score += 1
 
     return total_score / total_requests
+
+def has_eight_courses(stu):
+    combined_list = []
+    satisfied = 0
+
+    for lst in list(stu.student_classes.values()):
+        combined_list.extend(lst)
+
+    for c in stu._course_requests:
+        if c in combined_list and c not in outside_the_timetable:
+            satisfied += 1
+        
+    return satisfied > 5
+
+def students_with_eight_courses(set):
+    score = 0
+
+    for stu in set:
+        if has_eight_courses(stu):
+            score += 1
+
+    return score / 838
         
 def has_eight_courses_including_alternates(stu):
-    n = 0
+    combined_list = []
+    satisfied = 0
 
-    if "Outside" in stu.student_classes:
-        n = 1
+    for lst in list(stu.student_classes.values()):
+        combined_list.extend(lst)
 
-    # students should have 8 inside the timetable courses
-    if len(stu.student_classes) < min(len(stu._course_requests) + len(stu._alternates) , 8) + n:
-        return False
-    
-    return True
+    for c in stu._course_requests:
+        if c in combined_list and c not in outside_the_timetable:
+            satisfied += 1
+
+    for c in stu._alternates:
+        if c in combined_list and c not in outside_the_timetable:
+            satisfied += 1
+        
+    return satisfied > 5
 
 def students_with_eight_courses_including_alternates(set):
     counter = 0
