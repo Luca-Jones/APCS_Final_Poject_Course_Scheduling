@@ -394,8 +394,15 @@ def has_a_linear_course(i):
 # places student[i] in course somewhere from alpha[start] to alpha[end]
 def place(start, end, i, course):
 
+    c = 1
+    if int(student[i]._id) % 2 == 0:
+        temp = start
+        start = end
+        end = temp -2
+        c = -1
+
     # look through every available block
-    for k in range(start, end + 1, 1):
+    for k in range(start, end + 1, c):
 
         # if the slot is outside the time table or not yet taken up
         if k == 8 or (alpha[k] not in student[i].student_classes and not course.is_linear):
@@ -417,6 +424,10 @@ def place(start, end, i, course):
 
             # if the course is not yet offered in this block and a new class can be made
             elif len(course._sections) < int(course.number_of_classes_per_year) and alpha[k] not in course._sections:
+
+                
+                if len(master[alpha[k]]) >= 45:
+                    continue
 
                 course._sections[alpha[k]] = [student[i]._id]
                 
@@ -454,7 +465,8 @@ def place(start, end, i, course):
 
                 # if a new course can be made
                 elif len(course._sections) < int(course.number_of_classes_per_year) and alpha[k] not in course._sections:
-
+                    if len(master[alpha[k]]) >= 43 and len(master[alpha[(k + 4) % 8]]) >= 43:
+                        continue
                     # create a new class with the student in it and for sim blocking
                     course._sections[block] = [student[i]._id]
 
@@ -496,7 +508,8 @@ def place(start, end, i, course):
 
                 # if a new course can be made
                 elif len(course._sections) < int(course.number_of_classes_per_year) and alpha[k] not in course._sections:
-                    
+                    if len(master[alpha[k]]) >= 43 and len(master[alpha[(k + 4) % 8]]) >= 43:
+                        continue
                     # create a new class with the student in it and for sim blocking
                     course._sections[alpha[k]] = [student[i]._id]
 
@@ -638,6 +651,12 @@ for i in range(len(student)):
 
                 # make a new class?
                 if(len(get_course(alt)._sections) < int(get_course(alt).number_of_classes_per_year)):
+                    
+                    # skip if master has too many courses in this block
+                    if len(master[alpha[k]]) >= 43:
+                        continue
+                    elif get_course(alt).is_linear and len(master[alpha[(k + 4) % 8]]) >= 43:
+                        continue
 
                     # make a new class and add the student to that class                    
                     arrrrrr = []
@@ -652,7 +671,7 @@ for i in range(len(student)):
 
                     # check if linear
                     if (get_course(alt).is_linear and alpha[(k + 4) % 8] not in student[i].student_classes):
-                        
+
                         # add to the opposite semester same block in student classes
                         student[i].student_classes[alpha[(k + 4) % 8]] = [get_course(alt)._name]
 
@@ -700,7 +719,10 @@ def score(set):
         for c in s._course_requests:
             for block in list(s.student_classes.values()):
                 if c in block:
-                    total_score += 1
+                    if get_course(c).is_linear:
+                        total_score += 1
+                    else: 
+                        total_score += 1
            
 
     return total_score / total_requests
@@ -717,7 +739,8 @@ def score_with_alternates(set):
         for c in s._course_requests:
             for block in list(s.student_classes.values()):
                 if c in block:
-                    total_score += 1
+                    total_score +=1
+                    
         
         # find overlap
         for c in s._alternates:
@@ -727,29 +750,46 @@ def score_with_alternates(set):
 
     return total_score / total_requests
 
-def has_eight_courses(stu):
+def has_eight_courses(stu, missing):
     combined_list = []
     satisfied = 0
-
     for lst in list(stu.student_classes.values()):
         combined_list.extend(lst)
-
+    
     for c in stu._course_requests:
-        if c in combined_list and c not in outside_the_timetable:
+        if c in combined_list:
             satisfied += 1
-        
-    return satisfied > 5
+   
+    return satisfied == len(stu._course_requests) - missing
 
 def students_with_eight_courses(set):
     score = 0
 
     for stu in set:
-        if has_eight_courses(stu):
+        if has_eight_courses(stu, 0):
+            score += 1
+
+    return score / 838
+
+def students_missing_one_course(set):
+    score = 0
+
+    for stu in set:
+        if has_eight_courses(stu, 1):
+            score += 1
+
+    return score / 838
+
+def two_or_less_missing(set):
+    score = 0
+
+    for stu in set:
+        if has_eight_courses(stu, 0) or has_eight_courses(stu, 1) or has_eight_courses(stu, 2):
             score += 1
 
     return score / 838
         
-def has_eight_courses_including_alternates(stu):
+def has_eight_courses_including_alternates(stu, missing):
     combined_list = []
     satisfied = 0
 
@@ -757,33 +797,56 @@ def has_eight_courses_including_alternates(stu):
         combined_list.extend(lst)
 
     for c in stu._course_requests:
-        if c in combined_list and c not in outside_the_timetable:
+        if c in combined_list:
             satisfied += 1
 
     for c in stu._alternates:
-        if c in combined_list and c not in outside_the_timetable:
+        if c in combined_list:
             satisfied += 1
         
-    return satisfied > 5
+    return satisfied == len(stu._course_requests) - missing
 
-def students_with_eight_courses_including_alternates(set):
-    counter = 0
+
+def students_with_eight_courses_alt(set):
     score = 0
 
     for stu in set:
-        if has_eight_courses_including_alternates(stu):
-            if counter < 3:
-                #print(stu)
-                counter += 1
+        if has_eight_courses_including_alternates(stu, 0):
             score += 1
-    #print("\n")
+
     return score / 838
+
+def students_missing_one_course_alt(set):
+    score = 0
+
+    for stu in set:
+        if has_eight_courses_including_alternates(stu, 1):
+            score += 1
+
+    return score / 838
+
+def two_or_less_missing_alt(set):
+    score = 0
+
+    for stu in set:
+        if has_eight_courses_including_alternates(stu, 0) or has_eight_courses_including_alternates(stu, 1) or has_eight_courses_including_alternates(stu, 2):
+            score += 1
+
+    return score / 838
+
+
+
+
+
+for b in master:
+    print(len(master[b]), " ", end="")
+print("")
 
 print("percent of courses granted", score(student) // 0.001 / 10, " % ")
 print("percent of courses + alts granted", score_with_alternates(student) // 0.001 / 10, " % ")
-print("Percent of students with 8/8, 7/8, 6/8. No alt.", students_with_eight_courses(student) // 0.001 / 10, " % ")
-print("of students with 8/8, 7/8, 6/8. With Alt", students_with_eight_courses_including_alternates(student) // 0.001 / 10, " % ")
-print("Percent of students with 0-5/8 courses", (1 - students_with_eight_courses(student)) // 0.001 / 10, " % ")
+print("Percent of students with 8/8, 7/8, 6/8. No alt.", two_or_less_missing(student) // 0.001 / 10, " % ")
+print("of students with 8/8, 7/8, 6/8. With Alt", two_or_less_missing_alt(student) // 0.001 / 10, " % ")
+print("Percent of students with 0-5/8 courses", (1 - two_or_less_missing(student)) // 0.001 / 10, " % ")
 
 def select_student(id):
     for key in student[int(id) - 1000].student_classes:
@@ -796,6 +859,8 @@ for STUDENT_ID in range(1800, 1810, 1):
     #print(student[STUDENT_ID - 1000].student_classes)
     print("\n")
     select_student(STUDENT_ID)
+    print("\n")
+    print(student[STUDENT_ID - 1000])
     print("\n")
     '''
     print(student[STUDENT_ID - 1000]._course_requests)
@@ -813,6 +878,8 @@ for STUDENT_ID in range(1800, 1810, 1):
             print(get_course(upo)._temp_description)
     print("\n\n")
     '''
+print(has_eight_courses(student[806], 2))
+print(has_eight_courses_including_alternates(student[806], 1))
 COURSE_NAME = "MFOOD11---"
 print(COURSE_NAME, ":   ")
 print(get_course(COURSE_NAME)._sections)
