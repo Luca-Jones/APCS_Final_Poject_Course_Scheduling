@@ -243,7 +243,7 @@ else:
 
 
 try:
-       fi=open("pyp.txt","r")
+       fi=open("seed.txt","r")
        while True:
             #sets linear and out(short for outside the timetable) to false
             linear = False
@@ -349,7 +349,6 @@ for my_string in data:
 
 
 # SUCCESS METRICS
-
 def score(set):
     total_score = 0
     total_requests = 0
@@ -362,7 +361,10 @@ def score(set):
         for c in s._course_requests:
             for block in list(s.student_classes.values()):
                 if c in block:
-                    total_score += 1
+                    if get_course(c).is_linear:
+                        total_score += 1
+                    else: 
+                        total_score += 1
            
 
     return total_score / total_requests
@@ -379,7 +381,8 @@ def score_with_alternates(set):
         for c in s._course_requests:
             for block in list(s.student_classes.values()):
                 if c in block:
-                    total_score += 1
+                    total_score +=1
+                    
         
         # find overlap
         for c in s._alternates:
@@ -389,29 +392,46 @@ def score_with_alternates(set):
 
     return total_score / total_requests
 
-def has_eight_courses(stu):
+def has_eight_courses(stu, missing):
     combined_list = []
     satisfied = 0
-
     for lst in list(stu.student_classes.values()):
         combined_list.extend(lst)
-
+    
     for c in stu._course_requests:
-        if c in combined_list and c not in outside_the_timetable:
+        if c in combined_list:
             satisfied += 1
-        
-    return satisfied > 5
+   
+    return satisfied == len(stu._course_requests) - missing
 
 def students_with_eight_courses(set):
     score = 0
 
     for stu in set:
-        if has_eight_courses(stu):
+        if has_eight_courses(stu, 0):
+            score += 1
+
+    return score / 838
+
+def students_missing_one_course(set):
+    score = 0
+
+    for stu in set:
+        if has_eight_courses(stu, 1):
+            score += 1
+
+    return score / 838
+
+def two_or_less_missing(set):
+    score = 0
+
+    for stu in set:
+        if has_eight_courses(stu, 0) or has_eight_courses(stu, 1) or has_eight_courses(stu, 2):
             score += 1
 
     return score / 838
         
-def has_eight_courses_including_alternates(stu):
+def has_eight_courses_including_alternates(stu, missing):
     combined_list = []
     satisfied = 0
 
@@ -419,29 +439,42 @@ def has_eight_courses_including_alternates(stu):
         combined_list.extend(lst)
 
     for c in stu._course_requests:
-        if c in combined_list and c not in outside_the_timetable:
+        if c in combined_list:
             satisfied += 1
 
     for c in stu._alternates:
-        if c in combined_list and c not in outside_the_timetable:
+        if c in combined_list:
             satisfied += 1
         
-    return satisfied > 5
+    return satisfied == len(stu._course_requests) - missing
 
-def students_with_eight_courses_including_alternates(set):
-    counter = 0
+
+def students_with_eight_courses_alt(set):
     score = 0
 
     for stu in set:
-        if has_eight_courses_including_alternates(stu):
-            if counter < 3:
-                #print(stu)
-                counter += 1
+        if has_eight_courses_including_alternates(stu, 0):
             score += 1
-    #print("\n")
-    return score / 838
- 
 
+    return score / 838
+
+def students_missing_one_course_alt(set):
+    score = 0
+
+    for stu in set:
+        if has_eight_courses_including_alternates(stu, 1):
+            score += 1
+
+    return score / 838
+
+def two_or_less_missing_alt(set):
+    score = 0
+
+    for stu in set:
+        if has_eight_courses_including_alternates(stu, 0) or has_eight_courses_including_alternates(stu, 1) or has_eight_courses_including_alternates(stu, 2):
+            score += 1
+
+    return score / 838
 
 
 
@@ -455,17 +488,18 @@ best_student = copy.deepcopy(student)
 
 # OPTIMIZATION LOOP
 
-for iteration in range(10):
+for iteration in range(50):
     print(iteration)
     temp_courselist = copy.deepcopy(courselist)
     
     # timtable headers / keys   
     master = {"S1 A": [], "S1 B": [], "S1 C": [], "S1 D":[], "S2 A": [], "S2 B": [], "S2 C": [], "S2 D":[], "Outside":[]}       # master timetable
 
-    # make a random course order
-    for course in temp_courselist:
-        popped = temp_courselist.pop(temp_courselist.index(course))
-        temp_courselist.insert(random.randrange(0,len(courselist)), popped)
+    if not iteration == 0:
+        # make a random course order
+        for course in temp_courselist:
+            popped = temp_courselist.pop(temp_courselist.index(course))
+            temp_courselist.insert(random.randrange(0,len(courselist)), popped)
 
         
 
@@ -516,14 +550,16 @@ for iteration in range(10):
     def place(start, end, i, course):
         
         c = 1
+        #alpha.reverse()
         if int(student[i]._id) % 2 == 0:
             temp = start
             start = end
             end = temp -2
             c = -1
-            
+        
+
         # look through every available block
-        for k in range(start, end + 1, 1):
+        for k in range(start, end + 1, c):
 
             # if the slot is outside the time table or not yet taken up
             if k == 8 or (alpha[k] not in student[i].student_classes and not course.is_linear):
@@ -545,6 +581,9 @@ for iteration in range(10):
 
                 # if the course is not yet offered in this block and a new class can be made
                 elif len(course._sections) < int(course.number_of_classes_per_year) and alpha[k] not in course._sections:
+
+                    if len(master[alpha[k]]) >= 43:
+                        continue
 
                     course._sections[alpha[k]] = [student[i]._id]
                     
@@ -582,7 +621,8 @@ for iteration in range(10):
 
                     # if a new course can be made
                     elif len(course._sections) < int(course.number_of_classes_per_year) and alpha[k] not in course._sections:
-
+                        if len(master[alpha[k]]) >= 43 and len(master[alpha[(k + 4) % 8]]) >= 43:
+                            continue
                         # create a new class with the student in it and for sim blocking
                         course._sections[block] = [student[i]._id]
 
@@ -624,7 +664,8 @@ for iteration in range(10):
 
                     # if a new course can be made
                     elif len(course._sections) < int(course.number_of_classes_per_year) and alpha[k] not in course._sections:
-                        
+                        if len(master[alpha[k]]) >= 43 and len(master[alpha[(k + 4) % 8]]) >= 43:
+                            continue
                         # create a new class with the student in it and for sim blocking
                         course._sections[alpha[k]] = [student[i]._id]
 
@@ -767,6 +808,12 @@ for iteration in range(10):
                     # make a new class?
                     if(len(get_course(alt, temp_courselist)._sections) < int(get_course(alt, temp_courselist).number_of_classes_per_year)):
 
+                        # skip if master has too many courses in this block
+                        if len(master[alpha[k]]) >= 43:
+                            continue
+                        elif get_course(alt, temp_courselist).is_linear and len(master[alpha[(k + 4) % 8]]) >= 43:
+                            continue
+
                         # make a new class and add the student to that class                    
                         arrrrrr = []
                         arrrrrr.append(student[i]._id)
@@ -799,7 +846,8 @@ for iteration in range(10):
         #best_master
         #best_student
         #best_courselist
-    if (students_with_eight_courses(student) >= students_with_eight_courses(best_student)): 
+    if (two_or_less_missing(student) >= two_or_less_missing(best_student)): 
+        print(two_or_less_missing(student))
         best_master = copy.deepcopy(master) 
         best_student = copy.deepcopy(student)
         best_courselist = copy.deepcopy(temp_courselist)  
@@ -839,10 +887,15 @@ console.print(table)
 
 
 
-print("percent of courses granted", score(best_student) // 0.001 / 10, " % ")
-print("percent of courses + alts granted", score_with_alternates(best_student) // 0.001 / 10, " % ")
-print("percent of students with eight courses", students_with_eight_courses(best_student) // 0.001 / 10, " % ")
-print("percent of students with 8 courses + alts", students_with_eight_courses_including_alternates(best_student) // 0.001 / 10, " % ")
+for b in master:
+    print(len(master[b]), " ", end="")
+print("")
+
+print("percent of courses granted", score(student) // 0.001 / 10, " % ")
+print("percent of courses + alts granted", score_with_alternates(student) // 0.001 / 10, " % ")
+print("Percent of students with 8/8, 7/8, 6/8. No alt.", two_or_less_missing(student) // 0.001 / 10, " % ")
+print("of students with 8/8, 7/8, 6/8. With Alt", two_or_less_missing_alt(student) // 0.001 / 10, " % ")
+print("Percent of students with 0-5/8 courses", (1 - two_or_less_missing(student)) // 0.001 / 10, " % ")
 
 
 def select_student(id):
