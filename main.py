@@ -361,10 +361,7 @@ def score(set):
         for c in s._course_requests:
             for block in list(s.student_classes.values()):
                 if c in block:
-                    if get_course(c).is_linear:
-                        total_score += 1
-                    else: 
-                        total_score += 1
+                    total_score += 1
            
 
     return total_score / total_requests
@@ -488,7 +485,7 @@ best_student = copy.deepcopy(student)
 
 # OPTIMIZATION LOOP
 
-for iteration in range(50):
+for iteration in range(1):
     print(iteration)
     temp_courselist = copy.deepcopy(courselist)
     
@@ -549,17 +546,15 @@ for iteration in range(50):
     # places student[i] in course somewhere from alpha[start] to alpha[end]
     def place(start, end, i, course):
         
-        c = 1
-        #alpha.reverse()
+        direction = 1
         if int(student[i]._id) % 2 == 0:
             temp = start
             start = end
             end = temp -2
-            c = -1
+            direction = -1
         
-
         # look through every available block
-        for k in range(start, end + 1, c):
+        for k in range(start, end + 1, direction):
 
             # if the slot is outside the time table or not yet taken up
             if k == 8 or (alpha[k] not in student[i].student_classes and not course.is_linear):
@@ -582,7 +577,7 @@ for iteration in range(50):
                 # if the course is not yet offered in this block and a new class can be made
                 elif len(course._sections) < int(course.number_of_classes_per_year) and alpha[k] not in course._sections:
 
-                    if len(master[alpha[k]]) >= 43:
+                    if len(master[alpha[k]]) >= 44:
                         continue
 
                     course._sections[alpha[k]] = [student[i]._id]
@@ -846,8 +841,9 @@ for iteration in range(50):
         #best_master
         #best_student
         #best_courselist
-    if (two_or_less_missing(student) >= two_or_less_missing(best_student)): 
+    if (two_or_less_missing_alt(student) >= two_or_less_missing_alt(best_student)) and (two_or_less_missing(student) >= two_or_less_missing(best_student)): 
         print(two_or_less_missing(student))
+        print(two_or_less_missing_alt(student))
         best_master = copy.deepcopy(master) 
         best_student = copy.deepcopy(student)
         best_courselist = copy.deepcopy(temp_courselist)  
@@ -887,15 +883,15 @@ console.print(table)
 
 
 
-for b in master:
-    print(len(master[b]), " ", end="")
+for b in best_master:
+    print(len(best_master[b]), " ", end="")
 print("")
 
-print("percent of courses granted", score(student) // 0.001 / 10, " % ")
-print("percent of courses + alts granted", score_with_alternates(student) // 0.001 / 10, " % ")
-print("Percent of students with 8/8, 7/8, 6/8. No alt.", two_or_less_missing(student) // 0.001 / 10, " % ")
-print("of students with 8/8, 7/8, 6/8. With Alt", two_or_less_missing_alt(student) // 0.001 / 10, " % ")
-print("Percent of students with 0-5/8 courses", (1 - two_or_less_missing(student)) // 0.001 / 10, " % ")
+print("percent of courses granted", score(best_student) // 0.001 / 10, " % ")
+print("percent of courses + alts granted", score_with_alternates(best_student) // 0.001 / 10, " % ")
+print("Percent of students with 8/8, 7/8, 6/8. No alt.", two_or_less_missing(best_student) // 0.001 / 10, " % ")
+print("of students with 8/8, 7/8, 6/8. With Alt", two_or_less_missing_alt(best_student) // 0.001 / 10, " % ")
+print("Percent of students with 0-5/8 courses", (1 - two_or_less_missing(best_student)) // 0.001 / 10, " % ")
 
 
 def select_student(id):
@@ -936,8 +932,8 @@ print(get_course(COURSE_NAME, best_courselist)._sections)
 #for course in courselist:
  #   print(course._description, " : " , course._sections)
 
-for i in range(len(best_courselist)):
-    print(courselist[i]._name, " --> ", best_courselist[i]._name)
+#for i in range(len(best_courselist)):
+#    print(courselist[i]._name, " --> ", best_courselist[i]._name)
 
 with open("seed.txt", "w") as file:
     
