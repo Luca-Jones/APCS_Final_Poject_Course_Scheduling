@@ -358,6 +358,134 @@ def get_sequencing(name_of_course):
             return list(c.sequencing)
     return []
 
+
+def score(set):
+    total_score = 0
+    total_requests = 0
+
+    for s in set:
+        
+        total_requests += len(s._course_requests)
+
+        # find overlap
+        for c in s._course_requests:
+            for block in list(s.student_classes.values()):
+                if c in block:
+                    if get_course(c).is_linear:
+                        total_score += 1
+                    else: 
+                        total_score += 1
+           
+
+    return total_score / total_requests
+
+def score_with_alternates(set):
+    total_score = 0
+    total_requests = 0
+
+    for s in set:
+        
+        total_requests += len(s._course_requests) + len(s._alternates)
+
+        # find overlap
+        for c in s._course_requests:
+            for block in list(s.student_classes.values()):
+                if c in block:
+                    total_score +=1
+                    
+        
+        # find overlap
+        for c in s._alternates:
+            for block in list(s.student_classes.values()):
+                if c in block:
+                    total_score += 1
+
+    return total_score / total_requests
+
+def has_eight_courses(stu, missing):
+    combined_list = []
+    satisfied = 0
+    for lst in list(stu.student_classes.values()):
+        combined_list.extend(lst)
+    
+    for c in stu._course_requests:
+        if c in combined_list:
+            satisfied += 1
+   
+    return satisfied == len(stu._course_requests) - missing
+
+def students_with_eight_courses(set):
+    score = 0
+
+    for stu in set:
+        if has_eight_courses(stu, 0):
+            score += 1
+
+    return score / 838
+
+def students_missing_one_course(set):
+    score = 0
+
+    for stu in set:
+        if has_eight_courses(stu, 1):
+            score += 1
+
+    return score / 838
+
+def two_or_less_missing(set):
+    score = 0
+
+    for stu in set:
+        if has_eight_courses(stu, 0) or has_eight_courses(stu, 1) or has_eight_courses(stu, 2):
+            score += 1
+
+    return score / 838
+        
+def has_eight_courses_including_alternates(stu, missing):
+    combined_list = []
+    satisfied = 0
+
+    for lst in list(stu.student_classes.values()):
+        combined_list.extend(lst)
+
+    for c in stu._course_requests:
+        if c in combined_list:
+            satisfied += 1
+
+    for c in stu._alternates:
+        if c in combined_list:
+            satisfied += 1
+        
+    return satisfied == len(stu._course_requests) - missing
+
+
+def students_with_eight_courses_alt(set):
+    score = 0
+
+    for stu in set:
+        if has_eight_courses_including_alternates(stu, 0):
+            score += 1
+
+    return score / 838
+
+def students_missing_one_course_alt(set):
+    score = 0
+
+    for stu in set:
+        if has_eight_courses_including_alternates(stu, 1):
+            score += 1
+
+    return score / 838
+
+def two_or_less_missing_alt(set):
+    score = 0
+
+    for stu in set:
+        if has_eight_courses_including_alternates(stu, 0) or has_eight_courses_including_alternates(stu, 1) or has_eight_courses_including_alternates(stu, 2):
+            score += 1
+
+    return score / 838
+
 # course sorting
 
 # linear courses inside the time table
@@ -426,7 +554,7 @@ def place(start, end, i, course):
             elif len(course._sections) < int(course.number_of_classes_per_year) and alpha[k] not in course._sections:
 
                 
-                if len(master[alpha[k]]) >= 45:
+                if len(master[alpha[k]]) >= 44:
                     continue
 
                 course._sections[alpha[k]] = [student[i]._id]
@@ -707,134 +835,6 @@ console = Console()
 console.print(table)  
 
 
-def score(set):
-    total_score = 0
-    total_requests = 0
-
-    for s in set:
-        
-        total_requests += len(s._course_requests)
-
-        # find overlap
-        for c in s._course_requests:
-            for block in list(s.student_classes.values()):
-                if c in block:
-                    if get_course(c).is_linear:
-                        total_score += 1
-                    else: 
-                        total_score += 1
-           
-
-    return total_score / total_requests
-
-def score_with_alternates(set):
-    total_score = 0
-    total_requests = 0
-
-    for s in set:
-        
-        total_requests += len(s._course_requests) + len(s._alternates)
-
-        # find overlap
-        for c in s._course_requests:
-            for block in list(s.student_classes.values()):
-                if c in block:
-                    total_score +=1
-                    
-        
-        # find overlap
-        for c in s._alternates:
-            for block in list(s.student_classes.values()):
-                if c in block:
-                    total_score += 1
-
-    return total_score / total_requests
-
-def has_eight_courses(stu, missing):
-    combined_list = []
-    satisfied = 0
-    for lst in list(stu.student_classes.values()):
-        combined_list.extend(lst)
-    
-    for c in stu._course_requests:
-        if c in combined_list:
-            satisfied += 1
-   
-    return satisfied == len(stu._course_requests) - missing
-
-def students_with_eight_courses(set):
-    score = 0
-
-    for stu in set:
-        if has_eight_courses(stu, 0):
-            score += 1
-
-    return score / 838
-
-def students_missing_one_course(set):
-    score = 0
-
-    for stu in set:
-        if has_eight_courses(stu, 1):
-            score += 1
-
-    return score / 838
-
-def two_or_less_missing(set):
-    score = 0
-
-    for stu in set:
-        if has_eight_courses(stu, 0) or has_eight_courses(stu, 1) or has_eight_courses(stu, 2):
-            score += 1
-
-    return score / 838
-        
-def has_eight_courses_including_alternates(stu, missing):
-    combined_list = []
-    satisfied = 0
-
-    for lst in list(stu.student_classes.values()):
-        combined_list.extend(lst)
-
-    for c in stu._course_requests:
-        if c in combined_list:
-            satisfied += 1
-
-    for c in stu._alternates:
-        if c in combined_list:
-            satisfied += 1
-        
-    return satisfied == len(stu._course_requests) - missing
-
-
-def students_with_eight_courses_alt(set):
-    score = 0
-
-    for stu in set:
-        if has_eight_courses_including_alternates(stu, 0):
-            score += 1
-
-    return score / 838
-
-def students_missing_one_course_alt(set):
-    score = 0
-
-    for stu in set:
-        if has_eight_courses_including_alternates(stu, 1):
-            score += 1
-
-    return score / 838
-
-def two_or_less_missing_alt(set):
-    score = 0
-
-    for stu in set:
-        if has_eight_courses_including_alternates(stu, 0) or has_eight_courses_including_alternates(stu, 1) or has_eight_courses_including_alternates(stu, 2):
-            score += 1
-
-    return score / 838
-
-
 
 
 
@@ -854,7 +854,7 @@ def select_student(id):
             print(key, ": ", get_course(l)._temp_description)
     print("\n")
 
-for STUDENT_ID in range(1800, 1810, 1):
+for STUDENT_ID in range(1589, 1590, 1):
     print("\nStudent ", STUDENT_ID, ":")
     #print(student[STUDENT_ID - 1000].student_classes)
     print("\n")
